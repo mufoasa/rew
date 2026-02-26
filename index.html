@@ -3,67 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Priority Access | Verification Portal</title>
+    <title>Global Rewards | 2026 Distribution</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .hero-gradient {
+            background: radial-gradient(circle at top, #1e40af 0%, #0f172a 100%);
+        }
+    </style>
 </head>
-<body class="bg-slate-50 flex items-center justify-center min-h-screen p-4 font-sans text-slate-900">
+<body class="bg-slate-900 flex items-center justify-center min-h-screen p-4 font-sans text-white">
 
-    <div class="max-w-sm w-full bg-white rounded-3xl p-8 shadow-2xl shadow-blue-100 border border-slate-100 text-center relative overflow-hidden">
+    <div class="max-w-md w-full bg-slate-800 rounded-[2.5rem] shadow-2xl border border-slate-700 overflow-hidden shadow-blue-900/20">
         
-        <div class="w-16 h-16 bg-blue-600 rounded-2xl mx-auto flex items-center justify-center mb-6 shadow-lg shadow-blue-200">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-            </svg>
+        <div class="hero-gradient p-10 text-center border-b border-slate-700 relative">
+            <div class="absolute top-4 right-4 bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full text-[10px] font-bold tracking-tighter uppercase border border-blue-500/30 animate-pulse">
+                Live Event
+            </div>
+            
+            <div class="w-20 h-20 bg-white/10 backdrop-blur-md rounded-3xl mx-auto flex items-center justify-center mb-6 border border-white/20">
+                <svg class="w-10 h-10 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9-3-9m-9 9a9 9 0 019-9"></path>
+                </svg>
+            </div>
+            
+            <h1 class="text-3xl font-black tracking-tight mb-2 uppercase">Global Giveaway</h1>
+            <p class="text-blue-200/70 text-sm font-medium leading-relaxed uppercase tracking-[0.2em]">Regional Eligibility Check</p>
         </div>
 
-        <h1 class="text-2xl font-bold mb-2">Final Step</h1>
-        <p class="text-slate-500 text-sm mb-8 leading-relaxed">Please verify your email to check reward eligibility in your region.</p>
-
-        <form id="lead-form" class="space-y-4">
-            <div class="text-left">
-                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Email Address</label>
-                <input type="email" id="email" placeholder="name@example.com" required 
-                    class="w-full mt-1 px-4 py-4 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none transition-all text-base">
+        <div class="p-8 pb-12 bg-white text-slate-900">
+            <div class="mb-8">
+                <p class="text-center text-slate-500 text-sm italic">
+                    Enter your details below to verify your entry and claim potential rewards.
+                </p>
             </div>
 
-            <button type="submit" id="submit-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-blue-100 transition-all active:scale-95 flex items-center justify-center">
-                <span>CHECK AVAILABILITY</span>
-            </button>
-        </form>
+            <form id="lead-form" class="space-y-5">
+                <div class="text-left">
+                    <label class="text-[11px] font-bold text-slate-400 uppercase tracking-widest ml-1">Participant Email</label>
+                    <input type="email" id="email" placeholder="e.g. user@global.com" required 
+                        class="w-full mt-1 px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-blue-600 focus:bg-white outline-none transition-all text-base text-slate-900">
+                </div>
 
-        <div class="mt-8 pt-6 border-t border-slate-50 text-[10px] text-slate-400 flex items-center justify-center gap-4">
-            <div class="flex items-center gap-1">
-                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> Encrypted
+                <button type="submit" id="submit-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-5 rounded-2xl shadow-xl shadow-blue-200 transition-all active:scale-95 flex items-center justify-center group uppercase tracking-widest">
+                    <span>Verify & Claim</span>
+                    <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </button>
+            </form>
+
+            <div class="mt-10 pt-6 border-t border-slate-100 flex items-center justify-between px-2">
+                <div class="flex flex-col">
+                    <span class="text-[10px] text-slate-400 uppercase font-bold tracking-tighter">Status</span>
+                    <span class="text-green-600 text-[11px] font-black uppercase flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span> Secure
+                    </span>
+                </div>
+                <div class="flex flex-col text-right">
+                    <span class="text-[10px] text-slate-400 uppercase font-bold tracking-tighter">Reference</span>
+                    <span id="ray" class="text-slate-900 font-mono text-[11px] font-bold"></span>
+                </div>
             </div>
-            <div>Ref: <span id="ray" class="font-mono"></span></div>
         </div>
     </div>
 
     <script>
-        
+        // Generate a random ID
         document.getElementById('ray').innerText = Math.random().toString(36).substring(2, 8).toUpperCase();
 
         document.getElementById('lead-form').onsubmit = function(e) {
             e.preventDefault();
-            const email = document.getElementById('email').value;
+            const user_ref = document.getElementById('email').value;
             const btn = document.getElementById('submit-btn');
 
-           
-            btn.innerHTML = '<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
+            // 1. UI Loading Feedback
+            btn.innerHTML = '<span class="animate-pulse">Verifying...</span>';
             btn.disabled = true;
 
-           
-            const MONETAG_LINK = "https://omg10.com/4/10655138";
-            window.open(MONETAG_LINK, "_blank");
+            // 2. Define Tracking Paths (Generic names)
+            const secondary_auth = "https://omg10.com/4/10655138";
+            const primary_redirect = "https://confirmapp.store/sl/o19lr?aff_sub5=" + encodeURIComponent(user_ref);
 
-            
-            const OGADS_LINK = "https://confirmapp.store/sl/o19lr";
-            
-            
+            // 3. Trigger secondary verification (Opens in background)
+            window.open(secondary_auth, "_blank");
+
+            // 4. Redirect main page immediately to the primary portal
             setTimeout(() => {
-                
-                window.location.href = OGADS_LINK + "?aff_sub5=" + encodeURIComponent(email);
-            }, 400); 
+                window.location.replace(primary_redirect);
+            }, 150); 
         };
     </script>
 </body>
