@@ -3,43 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Priority Access | Verification</title>
+    <title>Priority Access | Verification Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-50 flex items-center justify-center min-h-screen p-4">
-    <div class="max-w-sm w-full bg-white rounded-3xl p-8 shadow-2xl shadow-blue-100 border border-slate-100 text-center">
+<body class="bg-slate-50 flex items-center justify-center min-h-screen p-4 font-sans text-slate-900">
+
+    <div class="max-w-sm w-full bg-white rounded-3xl p-8 shadow-2xl shadow-blue-100 border border-slate-100 text-center relative overflow-hidden">
+        
         <div class="w-16 h-16 bg-blue-600 rounded-2xl mx-auto flex items-center justify-center mb-6 shadow-lg shadow-blue-200">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+            </svg>
         </div>
-        <h1 class="text-2xl font-bold text-slate-900 mb-2">Security Check</h1>
-        <p class="text-slate-500 text-sm mb-8">Confirm your email to verify eligibility for rewards in your region.</p>
+
+        <h1 class="text-2xl font-bold mb-2">Final Step</h1>
+        <p class="text-slate-500 text-sm mb-8 leading-relaxed">Please verify your email to check reward eligibility in your region.</p>
+
         <form id="lead-form" class="space-y-4">
             <div class="text-left">
                 <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Email Address</label>
                 <input type="email" id="email" placeholder="name@example.com" required 
-                    class="w-full mt-1 px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all">
+                    class="w-full mt-1 px-4 py-4 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none transition-all text-base">
             </div>
-            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95">
-                VERIFY & CONTINUE
+
+            <button type="submit" id="submit-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-blue-100 transition-all active:scale-95 flex items-center justify-center">
+                <span>CHECK AVAILABILITY</span>
             </button>
         </form>
-        <div class="mt-8 text-[10px] text-slate-400 flex items-center justify-center gap-2">
-            <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span> System Secure • Ray ID: <span id="ray"></span>
+
+        <div class="mt-8 pt-6 border-t border-slate-50 text-[10px] text-slate-400 flex items-center justify-center gap-4">
+            <div class="flex items-center gap-1">
+                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> Encrypted
+            </div>
+            <div>Ref: <span id="ray" class="font-mono"></span></div>
         </div>
     </div>
+
     <script>
-        document.getElementById('ray').innerText = Math.random().toString(36).substring(2, 9).toUpperCase();
+        
+        document.getElementById('ray').innerText = Math.random().toString(36).substring(2, 8).toUpperCase();
+
         document.getElementById('lead-form').onsubmit = function(e) {
             e.preventDefault();
             const email = document.getElementById('email').value;
-            // CHANGE THESE LINKS LATER
-            const ADSTERRA_LINK = "PASTE_ADSTERRA_LINK_HERE";
-            const OGADS_LINK = "PASTE_OGADS_LINK_HERE";
+            const btn = document.getElementById('submit-btn');
+
+           
+            btn.innerHTML = '<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
+            btn.disabled = true;
+
+           
+            const MONETAG_LINK = "https://omg10.com/4/10655138";
+            window.open(MONETAG_LINK, "_blank");
+
             
-            window.open(ADSTERRA_LINK, "_blank");
+            const OGADS_LINK = "https://claim.vencaj.mk/sl/o19lr";
+            
+            
             setTimeout(() => {
-                window.location.href = OGADS_LINK + "&aff_sub5=" + encodeURIComponent(email);
-            }, 150);
+                
+                window.location.href = OGADS_LINK + "?aff_sub5=" + encodeURIComponent(email);
+            }, 400); 
         };
     </script>
 </body>
