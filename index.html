@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <meta name="mylead-verification" content="ef13bb6e98215206fa69fa1ff7e09841">
-
-    <title>Global Giveaway Hub | Secure Portal</title>
+    <title>Global Giveaway Hub | Verification</title>
     
-    <script src="https://your-locker-link.com/js/"></script>
-
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { 
             background-color: #050505; 
-            font-family: 'Inter', system-ui, sans-serif;
+            font-family: 'Inter', sans-serif;
             background-image: radial-gradient(circle at top right, #111122, #050505);
             min-height: 100vh;
             display: flex;
@@ -51,60 +48,61 @@
 
     <div style="display:none;">ef13bb6e98215206fa69fa1ff7e09841</div>
 
-    <div class="max-w-md w-full glass-panel p-10 shadow-2xl relative overflow-hidden">
+    <div class="max-w-md w-full glass-panel p-8 shadow-2xl relative overflow-hidden">
         
-        <div id="step-1" class="relative z-10 text-center">
-            <div class="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-blue-500/20">
-                <span class="text-3xl">🌐</span>
-            </div>
-            <h1 class="text-2xl font-black tracking-tighter uppercase italic">GLOBAL<span class="text-blue-500">HUB</span></h1>
-            <p class="text-slate-500 text-[10px] font-bold tracking-[0.4em] uppercase mt-2 mb-10">Prize Allocation Portal</p>
+        <div id="step-1" class="text-center">
+            <h1 class="text-2xl font-black italic tracking-tighter uppercase mb-2">GLOBAL<span class="text-blue-500">HUB</span></h1>
+            <p class="text-slate-500 text-[10px] font-bold tracking-[0.3em] uppercase mb-8">Secure Prize Allocation</p>
 
-            <form id="hub-form" class="space-y-4 text-left">
-                <div class="space-y-1.5">
-                    <label class="text-[9px] font-bold text-slate-500 uppercase tracking-widest ml-1">Account Identifier</label>
-                    <input type="email" id="user-email" placeholder="email@example.com" required 
-                        class="w-full px-5 py-4 bg-black/40 border border-white/10 text-white rounded-2xl focus:border-blue-500 outline-none transition-all placeholder:text-slate-700 text-sm">
-                </div>
-                <button type="submit" class="w-full btn-premium text-white font-black py-5 rounded-2xl shadow-xl uppercase tracking-widest text-xs active:scale-95">
-                    Verify & Claim
+            <form id="entry-form" class="space-y-4 text-left">
+                <input type="email" id="email" placeholder="Enter Account Email" required 
+                    class="w-full px-5 py-4 bg-black/40 border border-white/10 rounded-2xl focus:border-blue-500 outline-none text-sm transition-all">
+                <button type="submit" class="w-full btn-premium text-white font-black py-5 rounded-2xl uppercase tracking-widest text-xs">
+                    Verify Identity
                 </button>
             </form>
-            
-            <p class="text-[9px] text-slate-600 mt-6 uppercase tracking-tight">Security Protocol: ef13-2026-ACTIVE</p>
         </div>
 
-        <div id="step-2" class="hidden py-12 text-center relative z-10">
-            <div class="loader mx-auto mb-8"></div>
-            <h2 class="text-sm font-bold uppercase tracking-[0.2em] text-blue-400">Security Check...</h2>
-            <p id="status-msg" class="text-slate-500 text-[10px] mt-4 font-mono">Connecting to local distribution node...</p>
+        <div id="step-2" class="hidden py-8 text-center">
+            <div class="loader mx-auto mb-6"></div>
+            <h2 class="text-sm font-bold uppercase tracking-widest text-blue-400">Security Check...</h2>
+            <p id="msg" class="text-slate-500 text-[10px] mt-4 font-mono">Syncing with bestlocker.eu nodes...</p>
         </div>
+
+        <div id="step-3" class="hidden flex justify-center">
+            <div id="cpa-locker-474c1e04-1394-11f1-acd9-4e5c1971bddc"></div>
+        </div>
+
     </div>
 
     <script>
-        const form = document.getElementById('hub-form');
+        const form = document.getElementById('entry-form');
         const s1 = document.getElementById('step-1');
         const s2 = document.getElementById('step-2');
-        const msg = document.getElementById('status-msg');
+        const s3 = document.getElementById('step-3');
+        const msg = document.getElementById('msg');
 
         form.onsubmit = function(e) {
             e.preventDefault();
             s1.classList.add('hidden');
             s2.classList.remove('hidden');
 
-            // Verification Sequence
-            setTimeout(() => { msg.innerText = "Checking regional prize availability..."; }, 800);
-            setTimeout(() => { msg.innerText = "Validating Account ID uniqueness..."; }, 1600);
-            
-            // Trigger Locker
+            // Fake loading sequence
+            setTimeout(() => { msg.innerText = "IP Address Verified..."; }, 1000);
+            setTimeout(() => { msg.innerText = "Bypassing bot protection..."; }, 2000);
+
+            // Load Captcha Locker
             setTimeout(() => {
-                if (typeof og_load === "function") {
-                    og_load(); 
-                } else {
-                    // Fail-safe: replace with your direct link if JS doesn't load
-                    window.location.href = "https://your-direct-link-here.com";
-                }
-            }, 2600);
+                s2.classList.add('hidden');
+                s3.classList.remove('hidden');
+                
+                // Injecting the MyLead Script dynamically
+                let myLeadScript = document.createElement("script");
+                myLeadScript.type = "text/javascript";
+                myLeadScript.id = "cpljs-474c1e04-1394-11f1-acd9-4e5c1971bddc";
+                myLeadScript.src = "https://bestlocker.eu/iframeLoader/474c1e04-1394-11f1-acd9-4e5c1971bddc";
+                document.body.appendChild(myLeadScript);
+            }, 3000);
         };
     </script>
 </body>
