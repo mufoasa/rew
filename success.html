@@ -3,16 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Success</title>
+    <title>Application Confirmed | StreamMax</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-50 flex items-center justify-center min-h-screen p-4">
-    <div class="max-w-sm w-full bg-white rounded-3xl p-10 shadow-xl text-center">
-        <div class="text-green-500 mb-4">
-            <svg class="w-20 h-20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+<body class="bg-black text-white flex items-center justify-center min-h-screen p-6 font-sans">
+    <div class="max-w-md w-full text-center">
+        <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-green-500/20">
+            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7"></path>
+            </svg>
         </div>
-        <h1 class="text-2xl font-bold text-slate-900 mb-2">Entry Received</h1>
-        <p class="text-slate-500 text-sm">Verification complete. Please check your email for the next steps. This usually takes 5-10 minutes.</p>
+
+        <h1 class="text-3xl font-black italic uppercase mb-2">Application <span class="text-red-600">Locked In</span></h1>
+        <p class="text-slate-400 text-sm mb-8 leading-relaxed">
+            Your profile has been successfully verified. A Netflix Recruitment Liaison will contact you at your provided email within <span class="text-white font-bold">24-48 hours</span> with your dashboard access.
+        </p>
+
+        <div class="bg-white/5 border border-white/10 p-6 rounded-2xl text-left">
+            <h3 class="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-3">Next Steps:</h3>
+            <ul class="text-xs space-y-3 text-slate-300">
+                <li>• Keep an eye on your <span class="text-red-500 font-bold">Spam/Junk</span> folder.</li>
+                <li>• Do not submit multiple applications.</li>
+                <li>• Complete the introductory training video sent to your inbox.</li>
+            </ul>
+        </div>
+        
+        <p class="mt-10 text-[10px] text-slate-600 uppercase tracking-widest font-bold italic">Reference ID: #NF-2026-TX</p>
     </div>
 </body>
 </html>
