@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <meta name="mylead-verification" content="YOUR_CODE_HERE">
+    <meta name="mylead-verification" content="ef13bb6e98215206fa69fa1ff7e09841">
 
     <title>Global Giveaway Hub | Secure Portal</title>
     
@@ -13,132 +13,99 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { 
-            background-color: #08080c; 
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background-image: linear-gradient(to bottom, rgba(8, 8, 12, 0.8), rgba(8, 8, 12, 0.9)), url('https://your-project.vercel.app/hub-bg.jpg');
-            background-size: cover;
-            background-attachment: fixed;
+            background-color: #050505; 
+            font-family: 'Inter', system-ui, sans-serif;
+            background-image: radial-gradient(circle at top right, #111122, #050505);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
         }
         .glass-panel { 
-            background: rgba(255, 255, 255, 0.03); 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
+            background: rgba(255, 255, 255, 0.02); 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
             backdrop-filter: blur(20px); 
-            -webkit-backdrop-filter: blur(20px);
+            border-radius: 2.5rem;
         }
-        .btn-universal { 
-            background: linear-gradient(135deg, #10b981, #0ea5e9); 
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+        .btn-premium { 
+            background: linear-gradient(135deg, #2563eb, #7c3aed); 
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
         }
-        .btn-universal:hover { 
+        .btn-premium:hover { 
             transform: translateY(-2px); 
-            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3); 
-            filter: brightness(1.1);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3); 
         }
-        .loading-spinner {
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            border-top: 3px solid #10b981;
+        .loader {
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-top: 2px solid #2563eb;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             animation: spin 1s linear infinite;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
-<body class="text-white flex items-center justify-center min-h-screen p-4">
+<body class="text-white p-4">
 
-    <div id="main-container" class="max-w-md w-full glass-panel rounded-[2.5rem] p-8 md:p-10 shadow-2xl relative overflow-hidden">
+    <div style="display:none;">ef13bb6e98215206fa69fa1ff7e09841</div>
+
+    <div class="max-w-md w-full glass-panel p-10 shadow-2xl relative overflow-hidden">
         
-        <div class="absolute -top-24 -right-24 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl"></div>
-
-        <div id="step-1" class="relative z-10">
-            <div class="flex flex-col items-center text-center mb-10">
-                <div class="w-20 h-20 bg-white/5 rounded-3xl flex items-center justify-center mb-4 border border-white/10">
-                    <span class="text-4xl">🌐</span>
-                </div>
-                <h1 class="text-2xl font-black italic tracking-tighter uppercase">GLOBAL<span class="text-emerald-400">HUB</span></h1>
-                <p class="text-slate-500 text-[9px] font-bold tracking-[0.4em] uppercase mt-1">International Prize Verification</p>
+        <div id="step-1" class="relative z-10 text-center">
+            <div class="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-blue-500/20">
+                <span class="text-3xl">🌐</span>
             </div>
+            <h1 class="text-2xl font-black tracking-tighter uppercase italic">GLOBAL<span class="text-blue-500">HUB</span></h1>
+            <p class="text-slate-500 text-[10px] font-bold tracking-[0.4em] uppercase mt-2 mb-10">Prize Allocation Portal</p>
 
-            <div class="bg-white/5 rounded-2xl p-4 mb-8 border border-white/5 flex items-center gap-4">
-                <div class="flex -space-x-2">
-                    <div class="w-6 h-6 rounded-full bg-slate-700 border border-slate-800"></div>
-                    <div class="w-6 h-6 rounded-full bg-slate-600 border border-slate-800"></div>
+            <form id="hub-form" class="space-y-4 text-left">
+                <div class="space-y-1.5">
+                    <label class="text-[9px] font-bold text-slate-500 uppercase tracking-widest ml-1">Account Identifier</label>
+                    <input type="email" id="user-email" placeholder="email@example.com" required 
+                        class="w-full px-5 py-4 bg-black/40 border border-white/10 text-white rounded-2xl focus:border-blue-500 outline-none transition-all placeholder:text-slate-700 text-sm">
                 </div>
-                <p class="text-slate-300 text-[11px] font-medium">
-                    <span class="text-emerald-400 font-bold">142 users</span> currently verifying in your region.
-                </p>
-            </div>
-
-            <form id="verification-form" class="space-y-4">
-                <div>
-                    <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Account Identifier</label>
-                    <input type="email" id="email-input" placeholder="Enter email address..." required 
-                        class="w-full mt-2 px-5 py-4 bg-black/40 border border-white/10 text-white rounded-2xl focus:border-emerald-500 outline-none transition-all placeholder:text-slate-600">
-                </div>
-
-                <button type="submit" class="w-full btn-universal text-white font-black py-5 rounded-2xl shadow-xl uppercase tracking-widest text-sm active:scale-95">
-                    Start Verification
+                <button type="submit" class="w-full btn-premium text-white font-black py-5 rounded-2xl shadow-xl uppercase tracking-widest text-xs active:scale-95">
+                    Verify & Claim
                 </button>
             </form>
+            
+            <p class="text-[9px] text-slate-600 mt-6 uppercase tracking-tight">Security Protocol: ef13-2026-ACTIVE</p>
         </div>
 
-        <div id="step-2" class="hidden relative z-10 py-12 text-center">
-            <div class="loading-spinner mx-auto mb-8"></div>
-            <h2 class="text-lg font-bold uppercase italic tracking-tight">Syncing with Server...</h2>
-            <div class="mt-4 space-y-2">
-                <p id="status-text" class="text-emerald-400 text-xs font-mono font-bold uppercase tracking-wider">Establishing Connection</p>
-                <div class="w-full bg-white/5 h-1 rounded-full overflow-hidden">
-                    <div id="progress-bar" class="bg-emerald-500 h-full w-0 transition-all duration-500"></div>
-                </div>
-            </div>
+        <div id="step-2" class="hidden py-12 text-center relative z-10">
+            <div class="loader mx-auto mb-8"></div>
+            <h2 class="text-sm font-bold uppercase tracking-[0.2em] text-blue-400">Security Check...</h2>
+            <p id="status-msg" class="text-slate-500 text-[10px] mt-4 font-mono">Connecting to local distribution node...</p>
         </div>
-
     </div>
 
     <script>
-        const form = document.getElementById('verification-form');
-        const step1 = document.getElementById('step-1');
-        const step2 = document.getElementById('step-2');
-        const statusText = document.getElementById('status-text');
-        const progressBar = document.getElementById('progress-bar');
+        const form = document.getElementById('hub-form');
+        const s1 = document.getElementById('step-1');
+        const s2 = document.getElementById('step-2');
+        const msg = document.getElementById('status-msg');
 
         form.onsubmit = function(e) {
             e.preventDefault();
+            s1.classList.add('hidden');
+            s2.classList.remove('hidden');
+
+            // Verification Sequence
+            setTimeout(() => { msg.innerText = "Checking regional prize availability..."; }, 800);
+            setTimeout(() => { msg.innerText = "Validating Account ID uniqueness..."; }, 1600);
             
-            // UI Transition
-            step1.classList.add('opacity-0');
-            setTimeout(() => {
-                step1.classList.add('hidden');
-                step2.classList.remove('hidden');
-                startSimulation();
-            }, 300);
-        };
-
-        function startSimulation() {
-            const steps = [
-                { t: "Scanning Regional IP...", p: "30%" },
-                { t: "Fetching Prize Allocation...", p: "60%" },
-                { t: "Finalizing Security Handshake...", p: "90%" }
-            ];
-
-            steps.forEach((step, index) => {
-                setTimeout(() => {
-                    statusText.innerText = step.t;
-                    progressBar.style.width = step.p;
-                }, (index + 1) * 800);
-            });
-
-            // TRIGGER LOCKER
+            // Trigger Locker
             setTimeout(() => {
                 if (typeof og_load === "function") {
                     og_load(); 
                 } else {
-                    // Fallback to direct link if script fails
-                    window.location.href = "https://your-direct-locker-link.com";
+                    // Fail-safe: replace with your direct link if JS doesn't load
+                    window.location.href = "https://your-direct-link-here.com";
                 }
-            }, 3200);
-        }
+            }, 2600);
+        };
     </script>
 </body>
 </html>
