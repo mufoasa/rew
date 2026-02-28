@@ -10,65 +10,87 @@
         :root {
             --primary-color: #0070ba; /* PayPal Blue */
             --secondary-color: #003087;
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
         }
-        body { background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%); font-family: sans-serif; }
-        .card { box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); }
-        .btn-gradient { background: linear-gradient(90deg, #0070ba, #003087); }
+        body { background: var(--bg-gradient); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .main-card { box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); }
+        .btn-gradient { background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)); transition: all 0.2s; }
+        .btn-gradient:hover { opacity: 0.9; transform: translateY(-1px); }
+        .offer-card { transition: all 0.2s; border: 1px solid #e5e7eb; }
+        .offer-card:hover { transform: translateY(-2px); border-color: var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+        .trustpilot-stars { color: #00b67a; }
     </style>
 </head>
-<body class="p-4">
-    <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-6 card">
-        <div class="text-center mb-6">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" class="mx-auto h-12 mb-4">
-            <h1 class="text-3xl font-bold text-gray-800">$750 PayPal Cash</h1>
-            <p class="text-gray-600">Complete tasks below to unlock your reward</p>
-        </div>
+<body class="min-h-screen p-4 md:p-6">
+    
+    <div class="max-w-4xl mx-auto">
+        <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8 main-card">
+            
+            <div class="text-center mb-8">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" class="mx-auto h-10 mb-4">
+                <div class="flex justify-center items-center mb-2">
+                    <div class="trustpilot-stars text-xl">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <span class="text-gray-500 text-sm ml-2">TrustScore 4.8 | 2,540 reviews</span>
+                </div>
+                <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-2">Claim Your <span class="text-blue-600">$750</span> Cash</h1>
+                <p class="text-gray-600 text-lg">Complete the required tasks below to unlock your reward.</p>
+            </div>
 
-        <div id="offers-container" class="space-y-4">
-            <div class="text-center py-10">
-                <i class="fas fa-spinner fa-spin text-4xl text-blue-500"></i>
-                <p class="text-gray-500 mt-2">Loading offers...</p>
+            <div class="bg-gray-50 rounded-lg p-4 mb-8 border">
+                <div class="flex justify-between text-sm font-semibold mb-2">
+                    <span class="text-gray-700">Your Progress</span>
+                    <span class="text-blue-700">0 / 2 Offers</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-3">
+                    <div class="bg-blue-600 h-3 rounded-full" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div id="offers-container" class="space-y-4">
+                <div class="text-center py-10">
+                    <i class="fas fa-spinner fa-spin text-4xl text-blue-500"></i>
+                    <p class="text-gray-500 mt-2">Loading secure offers...</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-10 text-xs text-gray-400">
+                <p>This is a promotional reward opportunity. Tasks must be completed fully to qualify.</p>
             </div>
         </div>
     </div>
 
     <script>
-        // --- CONFIGURE THIS ---
-        const apiKey = '41687|Qo6yzt9oZtDMeAOESQBkfLM9z5FM70F9ezcFQKhj3b4edd86'; 
-        // ----------------------
-
         async function fetchOffers() {
             const container = document.getElementById('offers-container');
             
-            // Note: This uses a public IP service for demonstration. 
-            // Real apps need the user's actual IP passed from a backend.
-            const ip = '1.1.1.1'; 
-            const userAgent = navigator.userAgent;
-
             try {
-                const response = await fetch(`https://confirmapp.store/api/v2?ip=${ip}&user_agent=${encodeURIComponent(userAgent)}`, {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${apiKey}`
-                    }
-                });
-
+                // Call your Vercel backend function to hide the API Key
+                const response = await fetch('/api/get-offers'); 
                 const data = await response.json();
+                
                 container.innerHTML = ''; // Clear spinner
 
                 if (!data.offers || data.offers.length === 0) {
-                    container.innerHTML = '<p class="text-center text-gray-500">No offers available right now.</p>';
+                    container.innerHTML = '<p class="text-center text-gray-500 py-10">No offers available in your region right now. Please check back later.</p>';
                     return;
                 }
 
+                // Create HTML for each offer card
                 data.offers.forEach(offer => {
                     const offerCard = `
-                        <div class="offer-card bg-white p-4 rounded-lg border shadow-sm flex items-center justify-between hover:border-blue-500 transition">
-                            <div>
-                                <h3 class="font-bold text-sm text-gray-800">${offer.name}</h3>
-                                <p class="text-xs text-gray-500">${offer.description || 'Complete this task'}</p>
+                        <div class="offer-card bg-white p-5 rounded-xl flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="bg-blue-100 text-blue-700 p-3 rounded-lg mr-4">
+                                    <i class="fas fa-gift"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-gray-900">${offer.name}</h3>
+                                    <p class="text-sm text-gray-500">${offer.description || 'Complete this task to progress'}</p>
+                                </div>
                             </div>
-                            <a href="${offer.link}" target="_blank" class="btn-gradient text-white text-sm font-medium py-2 px-4 rounded-lg hover:opacity-90">
+                            <a href="${offer.link}" target="_blank" class="btn-gradient text-white text-sm font-semibold py-3 px-6 rounded-lg whitespace-nowrap">
                                 Earn $${offer.payout}
                             </a>
                         </div>
@@ -78,10 +100,11 @@
 
             } catch (error) {
                 console.error('Error:', error);
-                container.innerHTML = '<p class="text-center text-red-500">Failed to load offers. Please check your API key.</p>';
+                container.innerHTML = '<p class="text-center text-red-500 py-10">Failed to load offers. Please refresh the page.</p>';
             }
         }
 
+        // Run the function when the page loads
         fetchOffers();
     </script>
 </body>
