@@ -3,98 +3,1098 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reward Access Portal</title>
+<title>RewardHub — Official Partner Reward Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-<script src="https://cdn.tailwindcss.com"></script>
-
-<style>
-
-body{
-    background: linear-gradient(135deg,#eef2ff,#f8faff);
-    font-family: system-ui,-apple-system,sans-serif;
-}
-
-.glass{
-    backdrop-filter: blur(12px);
-    background: rgba(255,255,255,0.9);
-}
-
-.btn{
-    transition: 0.25s ease;
-}
-
-.btn:hover{
-    transform: translateY(-2px);
-}
-
-</style>
-
-</head>
-
-<body class="flex items-center justify-center min-h-screen p-4">
-
-<div class="glass shadow-2xl rounded-2xl p-8 w-full max-w-lg">
-
-<!-- Header -->
-<div class="text-center mb-6">
-<h1 class="text-3xl font-bold text-gray-900 mb-3">
-Exclusive Reward Access
-</h1>
-
-<p class="text-gray-600">
-Partner reward programs are available for visitors from
-<span class="text-blue-600 font-semibold" id="country-name">Detecting...</span>.
-</p>
-</div>
-
-<!-- Reward Info -->
-<div class="bg-blue-50 rounded-xl p-5 mb-6 text-center">
-<p class="text-lg font-semibold text-blue-700">
-Available Reward Campaigns
-</p>
-
-<p class="text-sm text-gray-600 mt-2">
-Complete partner verification steps to access digital reward opportunities.
-</p>
-</div>
-
-<!-- Button -->
-<a href="https://www.mobtrk.link/view.php?id=5543383&pub=3339265"
-data-interact-trigger
-data-tool-id="62672"
-class="btn block w-full bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold py-4 rounded-xl text-center">
-
-Continue to Offers
-
-</a>
-
-<!-- Footer -->
-<div class="mt-6 text-center text-xs text-gray-400 leading-relaxed">
-Partner reward platform. Access may require offer completion.<br>
-This portal is hosted on a .mk domain for regional access optimization.
-</div>
-
-</div>
-
-<!-- CPAlead Publisher Script -->
-<script>
-window.CPAlead_PublisherUserId = 3339265;
-</script>
-
+<script>window.CPAlead_PublisherUserId = 3339265;</script>
 <script src="https://cdnflair.com/js/interact-form.js" async defer></script>
 
-<!-- Country Detection -->
-<script>
-fetch("https://ipapi.co/json/")
-.then(res=>res.json())
-.then(data=>{
-    document.getElementById("country-name").innerText =
-        data.country_name || "your region";
-})
-.catch(()=>{
-    document.getElementById("country-name").innerText = "your region";
-});
-</script>
+<style>
+/* ─── TOKENS ─── */
+:root {
+  --ink:        #0c0e13;
+  --ink-2:      #1e2330;
+  --ink-3:      #3d4358;
+  --ink-4:      #6b7280;
+  --ink-5:      #9ca3af;
+  --border:     #e5e7eb;
+  --border-2:   #d1d5db;
+  --bg:         #f9fafb;
+  --surface:    #ffffff;
+  --gold:       #b8860b;
+  --gold-lt:    #f5f0e8;
+  --gold-bd:    #e2d09a;
+  --green:      #166534;
+  --green-lt:   #f0fdf4;
+  --green-bd:   #bbf7d0;
+  --blue:       #1e40af;
+  --blue-lt:    #eff6ff;
+  --blue-bd:    #bfdbfe;
+  --red-lt:     #fff1f2;
+  --r:          8px;
+  --r-md:       12px;
+  --r-lg:       16px;
+  --r-xl:       20px;
+  --sh-sm:      0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --sh-md:      0 4px 12px rgba(0,0,0,.08),0 2px 4px rgba(0,0,0,.04);
+  --sh-lg:      0 12px 32px rgba(0,0,0,.10),0 4px 8px rgba(0,0,0,.05);
+  --sh-xl:      0 20px 48px rgba(0,0,0,.12),0 8px 16px rgba(0,0,0,.06);
+}
 
+/* ─── RESET ─── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;border:none;background:none;font:inherit}
+
+/* ─── LAYOUT ─── */
+.c    { max-width:1080px;margin:0 auto;padding:0 24px }
+.c-sm { max-width:680px;margin:0 auto;padding:0 24px }
+.c-md { max-width:840px;margin:0 auto;padding:0 24px }
+
+/* ─── TOP STRIP ─── */
+.top-strip {
+  background: var(--ink);
+  padding: 9px 0;
+  text-align: center;
+  font-size: .75rem;
+  color: rgba(255,255,255,.55);
+  letter-spacing: .01em;
+}
+.top-strip span { color: rgba(255,255,255,.85); font-weight: 500 }
+.top-strip .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #4ade80; margin-right: 7px; vertical-align: middle; animation: pulse 2s infinite }
+@keyframes pulse { 0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(74,222,128,.4)} 50%{opacity:.7;box-shadow:0 0 0 4px rgba(74,222,128,0)} }
+
+/* ─── NAV ─── */
+.nav {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 200;
+}
+.nav__inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+}
+.nav__logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--ink);
+}
+.nav__logo-mark {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: var(--ink); display: flex; align-items: center; justify-content: center;
+}
+.nav__logo-mark svg { width: 18px; height: 18px }
+.nav__links { display: flex; align-items: center; gap: 32px; list-style: none }
+.nav__links a { font-size: .875rem; font-weight: 500; color: var(--ink-4); transition: color .15s }
+.nav__links a:hover { color: var(--ink) }
+.nav__right { display: flex; align-items: center; gap: 10px }
+.nav-btn-ghost {
+  padding: 8px 16px; border-radius: var(--r); border: 1.5px solid var(--border-2);
+  font-size: .875rem; font-weight: 600; color: var(--ink-3); background: transparent;
+  transition: border-color .15s, color .15s; cursor: pointer; display: inline-block;
+}
+.nav-btn-ghost:hover { border-color: var(--ink-3); color: var(--ink) }
+.nav-btn-dark {
+  padding: 8px 18px; border-radius: var(--r);
+  background: var(--ink); font-size: .875rem; font-weight: 600; color: #fff;
+  transition: background .15s, transform .1s; cursor: pointer; display: inline-block;
+}
+.nav-btn-dark:hover { background: var(--ink-2); transform: translateY(-1px) }
+
+/* ─── TRUST BAR ─── */
+.trust-bar {
+  background: var(--gold-lt);
+  border-bottom: 1px solid var(--gold-bd);
+  padding: 11px 0;
+}
+.trust-bar__inner {
+  display: flex; align-items: center; justify-content: center;
+  gap: 32px; flex-wrap: wrap;
+}
+.trust-item {
+  display: flex; align-items: center; gap: 7px;
+  font-size: .78rem; font-weight: 500; color: #78350f;
+}
+.trust-item svg { flex-shrink: 0; color: var(--gold) }
+
+/* ─── HERO ─── */
+.hero {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 72px 0 68px;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: 0; right: 0; bottom: 0;
+  width: 48%;
+  background: var(--bg);
+  border-left: 1px solid var(--border);
+}
+.hero__inner {
+  display: grid; grid-template-columns: 1fr 430px;
+  gap: 64px; align-items: start;
+  position: relative; z-index: 1;
+}
+.hero__kicker {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 5px 12px; border-radius: 100px;
+  background: var(--green-lt); border: 1px solid var(--green-bd);
+  font-size: .72rem; font-weight: 600; color: var(--green);
+  letter-spacing: .06em; text-transform: uppercase;
+  margin-bottom: 22px;
+}
+.live-dot { width: 6px; height: 6px; border-radius: 50%; background: #16a34a; animation: pulse 2s infinite }
+.hero__h1 {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(2rem, 3.8vw, 3.1rem);
+  font-weight: 800; line-height: 1.13;
+  letter-spacing: -.03em; color: var(--ink);
+  margin-bottom: 20px;
+}
+.hero__h1 span { position: relative }
+.hero__h1 span::after {
+  content: '';
+  position: absolute; bottom: -3px; left: 0; right: 0; height: 3px;
+  background: var(--gold); border-radius: 2px;
+}
+.hero__lead {
+  font-size: 1rem; color: var(--ink-3); line-height: 1.75;
+  max-width: 460px; margin-bottom: 36px;
+}
+.hero__cta-group { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 36px }
+.cta-main {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 14px 26px; border-radius: var(--r);
+  background: var(--ink); font-family: 'Sora', sans-serif;
+  font-size: .95rem; font-weight: 700; color: #fff;
+  box-shadow: 0 4px 16px rgba(12,14,19,.25);
+  transition: background .15s, box-shadow .15s, transform .1s;
+  text-decoration: none;
+}
+.cta-main:hover { background: var(--ink-2); box-shadow: 0 6px 24px rgba(12,14,19,.3); transform: translateY(-2px) }
+.cta-main svg { transition: transform .15s }
+.cta-main:hover svg { transform: translateX(3px) }
+.cta-sub-text { font-size: .8rem; color: var(--ink-5); display: flex; align-items: center; gap: 6px }
+.cta-sub-text svg { color: #16a34a }
+
+/* Social proof row */
+.hero__proof {
+  display: flex; align-items: center; gap: 0;
+  padding-top: 28px; border-top: 1px solid var(--border);
+}
+.proof-avatars { display: flex; margin-right: 14px }
+.proof-avatar {
+  width: 30px; height: 30px; border-radius: 50%;
+  border: 2px solid var(--surface);
+  background: var(--border); margin-left: -8px; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .65rem; font-weight: 700; color: var(--ink-3);
+}
+.proof-avatar:first-child { margin-left: 0 }
+.proof-text { font-size: .8rem; color: var(--ink-4) }
+.proof-text strong { color: var(--ink); font-weight: 600 }
+
+/* ─── PORTAL CARD ─── */
+.portal-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  box-shadow: var(--sh-xl);
+  overflow: hidden;
+  animation: slideUp .55s cubic-bezier(.22,.68,0,1.15) .1s both;
+}
+@keyframes slideUp { from{opacity:0;transform:translateY(28px) scale(.98)} to{opacity:1;transform:none} }
+
+.pc-header {
+  padding: 18px 20px;
+  background: var(--ink);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.pc-header__left { display: flex; align-items: center; gap: 10px }
+.pc-title { font-family: 'Sora', sans-serif; font-size: .9rem; font-weight: 700; color: #fff }
+.pc-sub   { font-size: .72rem; color: rgba(255,255,255,.5); margin-top: 2px }
+.pc-badge-live {
+  display: flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: 100px;
+  background: rgba(74,222,128,.12); border: 1px solid rgba(74,222,128,.25);
+  font-size: .68rem; font-weight: 700; color: #4ade80;
+  letter-spacing: .06em; text-transform: uppercase;
+}
+.pc-badge-live .dot { width: 5px; height: 5px; border-radius: 50%; background: #4ade80; animation: pulse 2s infinite }
+
+.pc-geo {
+  padding: 14px 20px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+.pc-geo__label {
+  font-size: .68rem; font-weight: 600; color: var(--ink-5);
+  letter-spacing: .08em; text-transform: uppercase; margin-bottom: 8px;
+  display: flex; align-items: center; gap: 6px;
+}
+.pc-geo__row { display: flex; align-items: center; gap: 10px }
+.pc-geo__flag { font-size: 1.5rem; line-height: 1 }
+.pc-geo__country { font-family: 'Sora', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--ink) }
+.pc-geo__shimmer {
+  display: inline-block; height: 18px; width: 150px; border-radius: 4px;
+  background: linear-gradient(90deg, #ebebeb 25%, #f5f5f5 50%, #ebebeb 75%);
+  background-size: 200% 100%; animation: sh 1.3s infinite;
+}
+@keyframes sh { from{background-position:200% 0} to{background-position:-200% 0} }
+.pc-geo__note { margin-top: 5px; font-size: .75rem; color: var(--ink-4) }
+.pc-geo__note strong { color: var(--blue); font-weight: 600 }
+
+.pc-progress { padding: 16px 20px; border-bottom: 1px solid var(--border) }
+.pc-progress__label {
+  font-size: .68rem; font-weight: 600; color: var(--ink-5);
+  letter-spacing: .08em; text-transform: uppercase; margin-bottom: 10px;
+  display: flex; justify-content: space-between;
+}
+.pc-progress__label span { color: var(--ink-3); font-weight: 500; letter-spacing: 0; text-transform: none }
+.progress-track {
+  height: 6px; background: var(--border); border-radius: 100px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; width: 33%; background: var(--ink);
+  border-radius: 100px; transition: width .8s ease;
+}
+
+.pc-steps { padding: 16px 20px; border-bottom: 1px solid var(--border) }
+.pc-step {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 12px 14px; border-radius: var(--r); margin-bottom: 8px;
+  border: 1px solid var(--border); background: var(--bg);
+  position: relative; transition: border-color .2s, box-shadow .2s;
+}
+.pc-step:last-child { margin-bottom: 0 }
+.pc-step--active {
+  border-color: var(--ink); background: var(--surface);
+  box-shadow: var(--sh-sm);
+}
+.pc-step--done { opacity: .55 }
+.pc-step__num {
+  width: 26px; height: 26px; flex-shrink: 0; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .72rem; font-weight: 800; font-family: 'Sora', sans-serif;
+}
+.sn-done { background: var(--green-lt); border: 1px solid var(--green-bd); color: var(--green) }
+.sn-active { background: var(--ink); color: #fff }
+.sn-wait { background: var(--border); border: 1px solid var(--border-2); color: var(--ink-5) }
+.pc-step__body h4 { font-size: .84rem; font-weight: 600; color: var(--ink); line-height: 1.3 }
+.pc-step__body p  { font-size: .74rem; color: var(--ink-4); margin-top: 2px; line-height: 1.5 }
+.pc-step__arrow {
+  position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  color: var(--ink-5); font-size: .75rem;
+}
+.pc-step--active .pc-step__arrow { color: var(--ink) }
+
+.pc-cta-wrap { padding: 16px 20px 18px }
+.pc-cta {
+  display: flex; align-items: center; justify-content: center; gap: 9px;
+  width: 100%; padding: 15px 20px; border-radius: var(--r);
+  background: var(--ink);
+  font-family: 'Sora', sans-serif; font-size: .97rem; font-weight: 700; color: #fff;
+  box-shadow: 0 4px 16px rgba(12,14,19,.25);
+  transition: background .15s, transform .1s, box-shadow .15s;
+  text-decoration: none;
+}
+.pc-cta:hover { background: var(--ink-2); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(12,14,19,.3) }
+.pc-security {
+  display: flex; align-items: center; justify-content: center; gap: 18px;
+  margin-top: 12px; flex-wrap: wrap;
+}
+.pc-security span {
+  display: flex; align-items: center; gap: 5px;
+  font-size: .7rem; color: var(--ink-5); font-weight: 500;
+}
+
+/* ─── DIVIDER SECTION ─── */
+.divider-section {
+  background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  padding: 24px 0;
+}
+.stats-row {
+  display: flex; align-items: stretch; justify-content: center;
+  flex-wrap: wrap;
+}
+.stat-block {
+  padding: 12px 40px;
+  border-right: 1px solid var(--border);
+  text-align: center;
+}
+.stat-block:last-child { border-right: none }
+.stat-val {
+  font-family: 'Sora', sans-serif; font-size: 1.7rem; font-weight: 800;
+  color: var(--ink); line-height: 1;
+}
+.stat-lbl { font-size: .75rem; color: var(--ink-5); margin-top: 4px; font-weight: 500 }
+
+/* ─── SECTION BASE ─── */
+.section { padding: 72px 0 }
+.section--gray { background: var(--bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border) }
+.section--white { background: var(--surface) }
+
+.s-eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 12px; border-radius: 100px;
+  background: var(--surface); border: 1px solid var(--border);
+  font-size: .7rem; font-weight: 600; color: var(--ink-4);
+  letter-spacing: .08em; text-transform: uppercase; margin-bottom: 14px;
+}
+.s-title {
+  font-family: 'Sora', sans-serif; font-size: clamp(1.6rem, 2.8vw, 2.3rem);
+  font-weight: 800; letter-spacing: -.03em; color: var(--ink); margin-bottom: 10px; line-height: 1.2;
+}
+.s-sub { font-size: .95rem; color: var(--ink-4); max-width: 520px; line-height: 1.75 }
+
+/* ─── HOW IT WORKS ─── */
+.hiw-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 48px; background: var(--border); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden }
+.hiw-cell {
+  background: var(--surface); padding: 32px 28px;
+  transition: background .2s;
+}
+.hiw-cell:hover { background: var(--bg) }
+.hiw-num {
+  font-family: 'Sora', sans-serif; font-size: 3.5rem; font-weight: 800;
+  color: var(--border); line-height: 1; margin-bottom: 20px; letter-spacing: -.04em;
+}
+.hiw-icon {
+  width: 44px; height: 44px; border-radius: var(--r-md);
+  background: var(--bg); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center; margin-bottom: 16px;
+  font-size: 1.2rem;
+}
+.hiw-cell h3 { font-family: 'Sora', sans-serif; font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 8px }
+.hiw-cell p { font-size: .84rem; color: var(--ink-4); line-height: 1.65 }
+
+/* ─── WHY TRUST ─── */
+.trust-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; margin-top: 44px }
+.trust-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 24px;
+  display: flex; gap: 16px; align-items: flex-start;
+  transition: box-shadow .2s, border-color .2s;
+}
+.trust-card:hover { box-shadow: var(--sh-md); border-color: var(--border-2) }
+.trust-icon {
+  width: 40px; height: 40px; flex-shrink: 0; border-radius: var(--r);
+  background: var(--bg); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+}
+.trust-card h3 { font-family: 'Sora', sans-serif; font-size: .9rem; font-weight: 700; color: var(--ink); margin-bottom: 5px }
+.trust-card p  { font-size: .8rem; color: var(--ink-4); line-height: 1.6 }
+
+/* ─── TESTIMONIALS ─── */
+.testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 44px }
+.testi-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 22px 20px;
+}
+.testi-stars { font-size: .85rem; letter-spacing: .06em; margin-bottom: 10px }
+.testi-quote { font-size: .84rem; color: var(--ink-3); line-height: 1.65; margin-bottom: 14px; font-style: italic }
+.testi-author { display: flex; align-items: center; gap: 10px }
+.testi-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--bg); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .75rem; font-weight: 700; color: var(--ink-3);
+}
+.testi-name { font-size: .8rem; font-weight: 600; color: var(--ink) }
+.testi-meta { font-size: .72rem; color: var(--ink-5) }
+
+/* ─── BOTTOM CTA ─── */
+.bottom-cta {
+  background: var(--ink); padding: 72px 0; text-align: center;
+  position: relative; overflow: hidden;
+}
+.bottom-cta::before {
+  content: '';
+  position: absolute; top: -1px; left: 0; right: 0; height: 1px;
+  background: rgba(255,255,255,.08);
+}
+.bottom-cta h2 {
+  font-family: 'Sora', sans-serif; font-size: clamp(1.8rem,3.5vw,2.8rem);
+  font-weight: 800; letter-spacing: -.03em; color: #fff;
+  margin-bottom: 12px; line-height: 1.15;
+}
+.bottom-cta p { font-size: .95rem; color: rgba(255,255,255,.5); max-width: 480px; margin: 0 auto 36px; line-height: 1.75 }
+.bottom-cta__geo-line {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 18px; border-radius: 100px;
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+  font-size: .82rem; color: rgba(255,255,255,.65);
+  margin-bottom: 28px;
+}
+.bottom-cta__geo-line strong { color: rgba(255,255,255,.9) }
+.cta-main-light {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 15px 32px; border-radius: var(--r);
+  background: var(--surface); font-family: 'Sora', sans-serif;
+  font-size: 1rem; font-weight: 700; color: var(--ink);
+  box-shadow: 0 4px 20px rgba(0,0,0,.3);
+  transition: box-shadow .15s, transform .1s;
+  text-decoration: none;
+}
+.cta-main-light:hover { box-shadow: 0 8px 32px rgba(0,0,0,.4); transform: translateY(-2px) }
+.cta-main-light svg { transition: transform .15s }
+.cta-main-light:hover svg { transform: translateX(3px) }
+.bottom-cta__note { margin-top: 18px; font-size: .76rem; color: rgba(255,255,255,.25) }
+
+/* ─── FAQ ─── */
+.faq { max-width: 680px; margin: 44px auto 0 }
+.faq-item {
+  border: 1px solid var(--border); border-radius: var(--r-md);
+  background: var(--surface); margin-bottom: 8px; overflow: hidden;
+}
+.faq-btn {
+  width: 100%; display: flex; align-items: center; justify-content: space-between;
+  padding: 17px 20px; text-align: left; cursor: pointer;
+  font-family: 'Sora', sans-serif; font-size: .9rem; font-weight: 700; color: var(--ink);
+  transition: background .15s; background: transparent;
+  border: none;
+}
+.faq-btn:hover { background: var(--bg) }
+.faq-icon {
+  width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--border-2);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  transition: transform .25s, border-color .15s;
+  color: var(--ink-4);
+}
+.faq-item.open .faq-icon { transform: rotate(45deg); border-color: var(--ink-3); color: var(--ink) }
+.faq-body { max-height: 0; overflow: hidden; transition: max-height .3s ease }
+.faq-item.open .faq-body { max-height: 160px }
+.faq-inner { padding: 0 20px 17px; font-size: .855rem; color: var(--ink-3); line-height: 1.75 }
+
+/* ─── LOGOS ─── */
+.logos-row {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 20px 0;
+}
+.logos-row__inner {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0; flex-wrap: wrap;
+}
+.logos-label { font-size: .72rem; font-weight: 600; color: var(--ink-5); letter-spacing: .08em; text-transform: uppercase; padding-right: 24px; border-right: 1px solid var(--border); margin-right: 24px; white-space: nowrap; flex-shrink: 0 }
+.logos-items { display: flex; align-items: center; gap: 28px; flex-wrap: wrap }
+.logo-chip {
+  display: flex; align-items: center; gap: 7px;
+  font-size: .8rem; font-weight: 600; color: var(--ink-4); opacity: .7;
+  transition: opacity .15s;
+}
+.logo-chip:hover { opacity: 1 }
+.logo-chip-dot {
+  width: 24px; height: 24px; border-radius: 6px; border: 1px solid var(--border);
+  background: var(--bg); display: flex; align-items: center; justify-content: center; font-size: .8rem;
+}
+
+/* ─── FOOTER ─── */
+.footer { background: var(--ink-2); padding: 48px 0 28px }
+.footer__grid {
+  display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  gap: 36px; padding-bottom: 36px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.footer__brand { }
+.footer__brand-name {
+  display: flex; align-items: center; gap: 9px;
+  font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.05rem; color: #fff;
+  margin-bottom: 10px;
+}
+.footer__brand-mark {
+  width: 30px; height: 30px; border-radius: 7px; background: rgba(255,255,255,.1);
+  display: flex; align-items: center; justify-content: center;
+}
+.footer__brand p { font-size: .78rem; color: rgba(255,255,255,.35); line-height: 1.7; max-width: 240px }
+.footer__col h4 {
+  font-size: .72rem; font-weight: 700; color: rgba(255,255,255,.4);
+  letter-spacing: .08em; text-transform: uppercase; margin-bottom: 14px;
+}
+.footer__col ul { list-style: none }
+.footer__col li { margin-bottom: 9px }
+.footer__col a { font-size: .8rem; color: rgba(255,255,255,.38); transition: color .15s }
+.footer__col a:hover { color: rgba(255,255,255,.75) }
+.footer__bottom {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  padding-top: 24px; gap: 20px; flex-wrap: wrap;
+}
+.footer__copy { font-size: .72rem; color: rgba(255,255,255,.22); line-height: 1.75; max-width: 620px }
+.footer__legal { display: flex; gap: 14px; flex-wrap: wrap; flex-shrink: 0 }
+.footer__legal a { font-size: .72rem; color: rgba(255,255,255,.3); transition: color .15s }
+.footer__legal a:hover { color: rgba(255,255,255,.65) }
+
+/* ─── ANIMATIONS ─── */
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .55s ease }
+.reveal.visible { opacity: 1; transform: none }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 960px) {
+  .hero::before { display: none }
+  .hero__inner { grid-template-columns: 1fr; gap: 40px }
+  .portal-card { max-width: 500px }
+  .hiw-grid { grid-template-columns: 1fr }
+  .testi-grid { grid-template-columns: 1fr }
+  .footer__grid { grid-template-columns: 1fr 1fr }
+  .nav__links { display: none }
+  .stat-block { padding: 12px 24px }
+}
+@media (max-width: 640px) {
+  .hero { padding: 48px 0 44px }
+  .trust-bar__inner { gap: 16px }
+  .trust-grid { grid-template-columns: 1fr }
+  .stats-row { flex-direction: column; align-items: stretch; text-align: center }
+  .stat-block { border-right: none; border-bottom: 1px solid var(--border) }
+  .stat-block:last-child { border-bottom: none }
+  .footer__grid { grid-template-columns: 1fr }
+  .footer__bottom { flex-direction: column }
+  .logos-label { display: none }
+  .section { padding: 52px 0 }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP STRIP -->
+<div class="top-strip">
+  <span class="dot"></span>
+  <span>Official Partner Portal</span> — Reward access programs are currently active for verified visitors in your region
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="c">
+    <div class="nav__inner">
+      <div class="nav__logo">
+        <div class="nav__logo-mark">
+          <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 2l2.4 4.8 5.3.8-3.85 3.75.91 5.3L10 14.1l-4.76 2.55.91-5.3L2.3 7.6l5.3-.8L10 2z" fill="#f5c842" stroke="#f5c842" stroke-width=".5" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        RewardHub
+      </div>
+      <ul class="nav__links">
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#why-trust">Why RewardHub</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <div class="nav__right">
+        <a href="#how-it-works" class="nav-btn-ghost">Learn More</a>
+        <a href="https://www.mobtrk.link/view.php?id=5543383&pub=3339265"
+           class="nav-btn-dark"
+           data-interact-trigger
+           data-tool-id="62672">Access Portal →</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="c">
+    <div class="trust-bar__inner">
+      <div class="trust-item">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1.5L2 4v4c0 3.5 2.5 6.3 6 7 3.5-.7 6-3.5 6-7V4L8 1.5z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+        256-bit Encrypted Portal
+      </div>
+      <div class="trust-item">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 8.5l2 2 3-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Verified Partner Network
+      </div>
+      <div class="trust-item">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 2C4.7 2 2 4.7 2 8s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6z" stroke="currentColor" stroke-width="1.4"/><path d="M8 5v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        Real-Time Region Matching
+      </div>
+      <div class="trust-item">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2.5 8.5l4 4 7-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        100,000+ Members Verified
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="c">
+    <div class="hero__inner">
+
+      <!-- LEFT -->
+      <div>
+        <div class="hero__kicker">
+          <span class="live-dot"></span>
+          Partner Programs Active
+        </div>
+        <h1 class="hero__h1">
+          Your region has<br>
+          active <span>reward programs</span><br>
+          available right now
+        </h1>
+        <p class="hero__lead">
+          RewardHub is an official partner portal that matches verified visitors with digital reward programs available in their detected region. Complete the short partner verification process to unlock access.
+        </p>
+        <div class="hero__cta-group">
+          <a href="https://www.mobtrk.link/view.php?id=5543383&pub=3339265"
+             class="cta-main"
+             data-interact-trigger
+             data-tool-id="62672">
+            Begin Verification Process
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+        <div class="cta-sub-text">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5L2 4v4c0 3.5 2.5 6.3 6 7 3.5-.7 6-3.5 6-7V4L8 1.5z"/></svg>
+          Secure process. Partner verification steps required to unlock offers.
+        </div>
+
+        <div class="hero__proof">
+          <div class="proof-avatars">
+            <div class="proof-avatar">JM</div>
+            <div class="proof-avatar">AK</div>
+            <div class="proof-avatar">RL</div>
+            <div class="proof-avatar">SK</div>
+            <div class="proof-avatar">+</div>
+          </div>
+          <div class="proof-text">
+            <strong>Over 100,000 members</strong> have completed verification and accessed available reward programs through this portal
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: PORTAL CARD -->
+      <div>
+        <div class="portal-card">
+          <div class="pc-header">
+            <div class="pc-header__left">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <rect x="2" y="5" width="16" height="12" rx="2.5" stroke="white" stroke-width="1.5"/>
+                <path d="M6 5V4a4 4 0 018 0v1" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+              <div>
+                <div class="pc-title">Partner Verification Portal</div>
+                <div class="pc-sub">Official RewardHub access system</div>
+              </div>
+            </div>
+            <div class="pc-badge-live">
+              <span class="dot"></span> Live
+            </div>
+          </div>
+
+          <!-- GEO -->
+          <div class="pc-geo">
+            <div class="pc-geo__label">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M2 8h12M8 1.5C6 4 5 6 5 8s1 4 3 6.5M8 1.5C10 4 11 6 11 8s-1 4-3 6.5" stroke="currentColor" stroke-width="1.3"/></svg>
+              Detected Region
+            </div>
+            <div class="pc-geo__row">
+              <span class="pc-geo__flag" id="geoFlag">🌐</span>
+              <span class="pc-geo__country" id="geoCountry"><span class="pc-geo__shimmer"></span></span>
+            </div>
+            <div class="pc-geo__note" id="geoNote">Scanning for available programs…</div>
+          </div>
+
+          <!-- PROGRESS -->
+          <div class="pc-progress">
+            <div class="pc-progress__label">
+              Verification Progress <span id="progressPct">Step 1 of 3</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
+          </div>
+
+          <!-- STEPS -->
+          <div class="pc-steps">
+            <div class="pc-step pc-step--done">
+              <div class="pc-step__num sn-done">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="pc-step__body">
+                <h4>Region Confirmed</h4>
+                <p>Your location has been detected and verified</p>
+              </div>
+              <div class="pc-step__arrow">✓</div>
+            </div>
+            <div class="pc-step pc-step--active">
+              <div class="pc-step__num sn-active">2</div>
+              <div class="pc-step__body">
+                <h4>Partner Verification — Required</h4>
+                <p>Complete partner steps to confirm eligibility</p>
+              </div>
+              <div class="pc-step__arrow">→</div>
+            </div>
+            <div class="pc-step">
+              <div class="pc-step__num sn-wait">3</div>
+              <div class="pc-step__body">
+                <h4>Reward Program Access</h4>
+                <p>Unlock digital reward offers for your region</p>
+              </div>
+              <div class="pc-step__arrow">—</div>
+            </div>
+          </div>
+
+          <!-- CTA -->
+          <div class="pc-cta-wrap">
+            <a href="https://www.mobtrk.link/view.php?id=5543383&pub=3339265"
+               class="pc-cta"
+               data-interact-trigger
+               data-tool-id="62672">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="4" width="14" height="10" rx="2" stroke="white" stroke-width="1.5"/><path d="M5 4V3a3 3 0 016 0v1" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Continue Verification →
+            </a>
+            <div class="pc-security">
+              <span>
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 1.5L2 4v4c0 3.5 2.5 6.3 6 7 3.5-.7 6-3.5 6-7V4L8 1.5z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+                SSL Secured
+              </span>
+              <span>
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 8.5l2 2 3-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Verified Partners
+              </span>
+              <span>
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M5 8h6M8 5v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                No hidden fees
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS -->
+<div class="logos-row">
+  <div class="c">
+    <div class="logos-row__inner">
+      <div class="logos-label">Partner Network</div>
+      <div class="logos-items">
+        <div class="logo-chip"><div class="logo-chip-dot">🎁</div> GiftRewards</div>
+        <div class="logo-chip"><div class="logo-chip-dot">📦</div> PromoVault</div>
+        <div class="logo-chip"><div class="logo-chip-dot">💳</div> OfferLink</div>
+        <div class="logo-chip"><div class="logo-chip-dot">🛍️</div> DealPort</div>
+        <div class="logo-chip"><div class="logo-chip-dot">🎯</div> TargetPerks</div>
+        <div class="logo-chip"><div class="logo-chip-dot">🔗</div> LinkReward</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="divider-section">
+  <div class="c">
+    <div class="stats-row">
+      <div class="stat-block reveal">
+        <div class="stat-val">200+</div>
+        <div class="stat-lbl">Active partner programs</div>
+      </div>
+      <div class="stat-block reveal">
+        <div class="stat-val">150+</div>
+        <div class="stat-lbl">Supported countries</div>
+      </div>
+      <div class="stat-block reveal">
+        <div class="stat-val">100K+</div>
+        <div class="stat-lbl">Verified members</div>
+      </div>
+      <div class="stat-block reveal">
+        <div class="stat-val">4.8 / 5</div>
+        <div class="stat-lbl">Average program rating</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="section section--white" id="how-it-works">
+  <div class="c">
+    <div class="s-eyebrow">Process Overview</div>
+    <h2 class="s-title">How partner verification works</h2>
+    <p class="s-sub">Three straightforward steps to confirm your eligibility and access available reward programs in your region.</p>
+    <div class="hiw-grid">
+      <div class="hiw-cell reveal">
+        <div class="hiw-num">01</div>
+        <div class="hiw-icon">🌍</div>
+        <h3>Region Detection</h3>
+        <p>Your IP address is used to detect your region and match it against available partner programs. This happens automatically when you visit the portal.</p>
+      </div>
+      <div class="hiw-cell reveal">
+        <div class="hiw-num">02</div>
+        <div class="hiw-icon">📋</div>
+        <h3>Partner Verification</h3>
+        <p>You'll complete a short partner-defined verification process. This confirms your eligibility and is required by our partner network before access is granted.</p>
+      </div>
+      <div class="hiw-cell reveal">
+        <div class="hiw-num">03</div>
+        <div class="hiw-icon">🔓</div>
+        <h3>Access Unlocked</h3>
+        <p>Once verification is complete, you gain direct access to the digital reward programs available in your area through our partner network.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY TRUST -->
+<section class="section section--gray" id="why-trust">
+  <div class="c">
+    <div class="s-eyebrow">Platform Standards</div>
+    <h2 class="s-title">Why visitors trust RewardHub</h2>
+    <p class="s-sub">We operate a transparent, secure partner portal built on four core commitments to every visitor.</p>
+    <div class="trust-grid">
+      <div class="trust-card reveal">
+        <div class="trust-icon">🔒</div>
+        <div>
+          <h3>Bank-Level Encryption</h3>
+          <p>All data transmitted through the portal uses 256-bit SSL encryption. Your information is never shared with third parties outside the verified partner network.</p>
+        </div>
+      </div>
+      <div class="trust-card reveal">
+        <div class="trust-icon">✅</div>
+        <div>
+          <h3>Vetted Partner Network</h3>
+          <p>Every program on RewardHub comes from a vetted and approved partner. We review and maintain standards across our entire network on an ongoing basis.</p>
+        </div>
+      </div>
+      <div class="trust-card reveal">
+        <div class="trust-icon">🌍</div>
+        <div>
+          <h3>Accurate Region Matching</h3>
+          <p>Our system uses reliable IP geolocation to ensure you only see programs genuinely available in your country. No bait-and-switch, no irrelevant offers.</p>
+        </div>
+      </div>
+      <div class="trust-card reveal">
+        <div class="trust-icon">📄</div>
+        <div>
+          <h3>Transparent Terms</h3>
+          <p>We are upfront: access to this portal is free. Partner programs may have their own steps. No outcomes are guaranteed. Everything is disclosed before you proceed.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section section--white">
+  <div class="c">
+    <div class="s-eyebrow">Member Experiences</div>
+    <h2 class="s-title">What verified members say</h2>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"The verification process was straightforward and took less than 5 minutes. The portal clearly explained each step before I started."</div>
+        <div class="testi-author">
+          <div class="testi-avatar">JM</div>
+          <div>
+            <div class="testi-name">James M.</div>
+            <div class="testi-meta">Verified Member · United States</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"I appreciated that the site was transparent about what the partner steps involved. No surprises. Exactly what it said it was."</div>
+        <div class="testi-author">
+          <div class="testi-avatar">AK</div>
+          <div>
+            <div class="testi-name">Amara K.</div>
+            <div class="testi-meta">Verified Member · United Kingdom</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★☆</div>
+        <div class="testi-quote">"Clean, professional portal. The region detection worked correctly, which made the whole process feel more legitimate compared to other sites."</div>
+        <div class="testi-author">
+          <div class="testi-avatar">RL</div>
+          <div>
+            <div class="testi-name">Rafael L.</div>
+            <div class="testi-meta">Verified Member · Canada</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="bottom-cta">
+  <div class="c-sm" style="text-align:center">
+    <div class="bottom-cta__geo-line">
+      <span id="ctaGeoFlag">🌐</span>
+      Programs available for visitors from <strong id="ctaGeoCountry">your region</strong>
+    </div>
+    <h2>Ready to complete your verification?</h2>
+    <p>Access to the portal is free. Partner verification steps are required to unlock the reward programs available in your detected region.</p>
+    <a href="https://www.mobtrk.link/view.php?id=5543383&pub=3339265"
+       class="cta-main-light"
+       data-interact-trigger
+       data-tool-id="62672">
+      Begin Partner Verification
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <div class="bottom-cta__note">No guaranteed outcomes · Regional availability varies · Partner terms apply</div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section section--gray" id="faq">
+  <div class="c-sm">
+    <div class="s-eyebrow" style="margin:0 auto 14px;display:table">Frequently Asked Questions</div>
+    <h2 class="s-title" style="text-align:center">Common questions</h2>
+    <div class="faq">
+      <div class="faq-item">
+        <button class="faq-btn" onclick="faqToggle(this)">
+          What exactly is RewardHub?
+          <span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 2.5l3 3 3-3M5 5.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <div class="faq-body"><div class="faq-inner">RewardHub is an independent partner portal that connects eligible visitors with third-party digital reward and incentive programs. We verify your region, match you with available programs, and facilitate access through our partner network. We do not operate the reward programs directly.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="faqToggle(this)">
+          Why is partner verification required?
+          <span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 2.5l3 3 3-3M5 5.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <div class="faq-body"><div class="faq-inner">Our partner programs require eligibility verification before granting access. This is a standard industry requirement that helps partners ensure the quality and legitimacy of their user base. The steps are defined entirely by the partner — not by RewardHub.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="faqToggle(this)">
+          How does region detection work?
+          <span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 2.5l3 3 3-3M5 5.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <div class="faq-body"><div class="faq-inner">We use IP-based geolocation to detect your country automatically. This allows us to show only the partner programs that are genuinely active and available for visitors from your specific region, ensuring relevance and accuracy.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="faqToggle(this)">
+          Is using this portal free?
+          <span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 2.5l3 3 3-3M5 5.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <div class="faq-body"><div class="faq-inner">Yes. Accessing the RewardHub portal itself is completely free. Individual partner programs may include their own steps or requirements as part of their verification process. These are always clearly communicated before you proceed.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="faqToggle(this)">
+          Are rewards or payouts guaranteed?
+          <span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 2.5l3 3 3-3M5 5.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <div class="faq-body"><div class="faq-inner">No. RewardHub does not guarantee any specific rewards, payments, or outcomes. Program terms, eligibility requirements, and reward fulfillment are entirely controlled by the individual partner programs, and results will vary depending on the partner and your region.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="c">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <div class="footer__brand-name">
+          <div class="footer__brand-mark">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M10 2l2.4 4.8 5.3.8-3.85 3.75.91 5.3L10 14.1l-4.76 2.55.91-5.3L2.3 7.6l5.3-.8L10 2z" fill="#f5c842" stroke="#f5c842" stroke-width=".5" stroke-linejoin="round"/></svg>
+          </div>
+          RewardHub
+        </div>
+        <p>An independent partner portal connecting eligible visitors with verified third-party reward programs available in their region.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Portal</h4>
+        <ul>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#why-trust">Why RewardHub</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+          <li><a href="#">Disclaimer</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Partner Info</a></li>
+          <li><a href="#">Accessibility</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copy">
+        © 2025 RewardHub. All rights reserved. RewardHub is an independent portal and is not affiliated with, endorsed by, or officially connected to any specific brand, company, or reward provider. Reward availability, program eligibility, terms, and outcomes are determined solely by individual third-party partner programs. RewardHub makes no guarantee of any specific reward, payment, or outcome from participation. Completion of partner-defined verification steps is required. Regional availability of programs varies. By accessing this portal you agree to our Terms of Use and Privacy Policy.
+      </p>
+      <div class="footer__legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Cookies</a>
+        <a href="#">Disclaimer</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── GEO DETECTION ── */
+(function(){
+  var flags={US:'🇺🇸',GB:'🇬🇧',CA:'🇨🇦',AU:'🇦🇺',DE:'🇩🇪',FR:'🇫🇷',IT:'🇮🇹',ES:'🇪🇸',NL:'🇳🇱',SE:'🇸🇪',NO:'🇳🇴',DK:'🇩🇰',FI:'🇫🇮',PL:'🇵🇱',CH:'🇨🇭',AT:'🇦🇹',BE:'🇧🇪',NZ:'🇳🇿',IE:'🇮🇪',PT:'🇵🇹',BR:'🇧🇷',MX:'🇲🇽',AR:'🇦🇷',JP:'🇯🇵',KR:'🇰🇷',IN:'🇮🇳',ZA:'🇿🇦',SG:'🇸🇬',MY:'🇲🇾',PH:'🇵🇭',NG:'🇳🇬',GH:'🇬🇭',KE:'🇰🇪',TH:'🇹🇭',ID:'🇮🇩',VN:'🇻🇳',PK:'🇵🇰',EG:'🇪🇬',MA:'🇲🇦',CL:'🇨🇱',CO:'🇨🇴',PE:'🇵🇪',RO:'🇷🇴',HU:'🇭🇺',CZ:'🇨🇿',GR:'🇬🇷',TR:'🇹🇷',UA:'🇺🇦',IL:'🇮🇱',SA:'🇸🇦',AE:'🇦🇪',QA:'🇶🇦'};
+
+  function apply(country, code){
+    var f = flags[code]||'🌍';
+    // Card
+    document.getElementById('geoFlag').textContent = f;
+    document.getElementById('geoCountry').textContent = country;
+    document.getElementById('geoNote').innerHTML = 'Partner reward programs <strong style="color:#1e40af">available for ' + country + '</strong>';
+    // Bottom CTA
+    document.getElementById('ctaGeoFlag').textContent = f;
+    document.getElementById('ctaGeoCountry').textContent = country;
+  }
+  function fallback(){
+    document.getElementById('geoFlag').textContent = '🌐';
+    document.getElementById('geoCountry').textContent = 'Your Region';
+    document.getElementById('geoNote').innerHTML = 'Partner reward programs <strong style="color:#1e40af">available in your region</strong>';
+  }
+
+  fetch('https://ipapi.co/json/')
+    .then(function(r){return r.json();})
+    .then(function(d){
+      if(d&&d.country_name&&d.country_code) apply(d.country_name,d.country_code);
+      else throw 0;
+    })
+    .catch(function(){
+      fetch('https://ip-api.com/json/?fields=country,countryCode')
+        .then(function(r){return r.json();})
+        .then(function(d){ if(d&&d.country) apply(d.country,d.countryCode||''); else throw 0; })
+        .catch(fallback);
+    });
+})();
+
+/* ── FAQ ── */
+function faqToggle(btn){
+  var item = btn.closest('.faq-item');
+  var open = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(function(el){el.classList.remove('open');});
+  if(!open) item.classList.add('open');
+}
+
+/* ── SCROLL REVEAL ── */
+(function(){
+  if(!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('visible');});
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+})();
+
+/* ── PROGRESS ANIMATION ── */
+setTimeout(function(){
+  var fill = document.getElementById('progressFill');
+  if(fill) fill.style.width = '38%';
+}, 600);
+</script>
 </body>
 </html>
