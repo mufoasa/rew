@@ -3,109 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Claim Your Reward | PayPal Cash</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #0070ba; /* PayPal Blue */
-            --secondary-color: #003087;
-            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
-        }
-        body { background: var(--bg-gradient); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        .main-card { box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); }
-        .btn-gradient { background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)); transition: all 0.2s; }
-        .btn-gradient:hover { opacity: 0.9; transform: translateY(-1px); }
-        .offer-card { transition: all 0.2s; border: 1px solid #e5e7eb; }
-        .offer-card:hover { transform: translateY(-2px); border-color: var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
-        .trustpilot-stars { color: #00b67a; }
-    </style>
+    <title>Claim Your PayPal Reward</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="min-h-screen p-4 md:p-6">
-    
-    <div class="max-w-4xl mx-auto">
-        <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8 main-card">
-            
-            <div class="text-center mb-8">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" class="mx-auto h-10 mb-4">
-                <div class="flex justify-center items-center mb-2">
-                    <div class="trustpilot-stars text-xl">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                    <span class="text-gray-500 text-sm ml-2">TrustScore 4.8 | 2,540 reviews</span>
-                </div>
-                <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-2">Claim Your <span class="text-blue-600">$750</span> Cash</h1>
-                <p class="text-gray-600 text-lg">Complete the required tasks below to unlock your reward.</p>
-            </div>
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen p-4">
 
-            <div class="bg-gray-50 rounded-lg p-4 mb-8 border">
-                <div class="flex justify-between text-sm font-semibold mb-2">
-                    <span class="text-gray-700">Your Progress</span>
-                    <span class="text-blue-700">0 / 2 Offers</span>
-                </div>
-                <div class="w-full bg-gray-200 rounded-full h-3">
-                    <div class="bg-blue-600 h-3 rounded-full" style="width: 0%"></div>
-                </div>
-            </div>
+    <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md text-center">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" class="h-12 mx-auto mb-6">
+        
+        <h1 class="text-3xl font-bold text-gray-900 mb-4">
+            $750 Reward Available in <span id="country-name" class="text-blue-600">Loading...</span>!
+        </h1>
+        
+        <p class="text-gray-600 mb-8">
+            Complete the quick verification below to claim your balance directly to your PayPal account.
+        </p>
 
-            <div id="offers-container" class="space-y-4">
-                <div class="text-center py-10">
-                    <i class="fas fa-spinner fa-spin text-4xl text-blue-500"></i>
-                    <p class="text-gray-500 mt-2">Loading secure offers...</p>
-                </div>
-            </div>
-
-            <div class="text-center mt-10 text-xs text-gray-400">
-                <p>This is a promotional reward opportunity. Tasks must be completed fully to qualify.</p>
-            </div>
-        </div>
+        <a href="offers.html" class="block w-full bg-blue-600 text-white text-lg font-semibold py-4 rounded-xl hover:bg-blue-700 transition duration-200">
+            Claim Now
+        </a>
     </div>
 
     <script>
-        async function fetchOffers() {
-            const container = document.getElementById('offers-container');
-            
-            try {
-                // Call your Vercel backend function to hide the API Key
-                const response = await fetch('/api/get-offers'); 
-                const data = await response.json();
-                
-                container.innerHTML = ''; // Clear spinner
-
-                if (!data.offers || data.offers.length === 0) {
-                    container.innerHTML = '<p class="text-center text-gray-500 py-10">No offers available in your region right now. Please check back later.</p>';
-                    return;
-                }
-
-                // Create HTML for each offer card
-                data.offers.forEach(offer => {
-                    const offerCard = `
-                        <div class="offer-card bg-white p-5 rounded-xl flex items-center justify-between">
-                            <div class="flex items-center">
-                                <div class="bg-blue-100 text-blue-700 p-3 rounded-lg mr-4">
-                                    <i class="fas fa-gift"></i>
-                                </div>
-                                <div>
-                                    <h3 class="font-bold text-gray-900">${offer.name}</h3>
-                                    <p class="text-sm text-gray-500">${offer.description || 'Complete this task to progress'}</p>
-                                </div>
-                            </div>
-                            <a href="${offer.link}" target="_blank" class="btn-gradient text-white text-sm font-semibold py-3 px-6 rounded-lg whitespace-nowrap">
-                                Earn $${offer.payout}
-                            </a>
-                        </div>
-                    `;
-                    container.innerHTML += offerCard;
-                });
-
-            } catch (error) {
-                console.error('Error:', error);
-                container.innerHTML = '<p class="text-center text-red-500 py-10">Failed to load offers. Please refresh the page.</p>';
-            }
-        }
-
-        // Run the function when the page loads
-        fetchOffers();
+        // Detect country using free IP API
+        fetch('https://ipapi.co/json/')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('country-name').textContent = data.country_name;
+            })
+            .catch(error => {
+                console.error('Error fetching country:', error);
+                document.getElementById('country-name').textContent = "your country";
+            });
     </script>
 </body>
 </html>
