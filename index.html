@@ -7,8 +7,27 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-<script>window.CPAlead_PublisherUserId = 3339265;</script>
-<script src="https://cdnflair.com/js/interact-form.js" async defer></script>
+<script type="text/javascript">
+    $(function() {
+        // This URL fetches only Email/Zip offers for the user's detected country
+        var feedUrl = "https://www.cpagrip.com/common/offer_feed_json.php?user_id=2503429&pubkey=2cc7a70c50150c81bbeac57877526421&offer_type=Email/Zip+Submit&country=user";
+        
+        $.getJSON(feedUrl, function(json_data){
+            var offer_text = '<ul>';
+            
+            $.each(json_data.offers, function(key, offer){
+                // This creates a clickable list of offers
+                offer_text += '<li>';
+                offer_text += '<a href="' + offer.offerlink + '" target="_blank">' + offer.title + '</a>';
+                offer_text += '</li>';
+            });
+            
+            offer_text += '</ul>';
+            
+            $(".offer_holder").html(offer_text);
+        });
+    });
+</script>
 
 <!-- GEO DETECTION: JSONP method loads before page renders, guarantees country -->
 <script>
