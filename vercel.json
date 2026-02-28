@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "api/postback.php": {
+      "runtime": "vercel-php@0.7.0"
+    }
+  },
+  "routes": [
+    {
+      "src": "/postback.php",
+      "dest": "/api/postback.php"
+    }
+  ]
+}
