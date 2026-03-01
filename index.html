@@ -1,761 +1,414 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RewardHub — Official Partner Reward Portal</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RewardHub — Premium Earning Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a202c; /* Darker, more corporate */
+            --primary-light: #2d3748;
+            --accent: #3182ce; /* Professional blue */
+            --accent-light: #4299e1;
+            --text-dark: #2d3748;
+            --text-light: #4a5568;
+            --background: #f7fafc;
+            --white: #ffffff;
+            --border: #edf2f7;
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
 
-<script type="text/javascript">
-    $(function() {
-        // This URL fetches only Email/Zip offers for the user's detected country
-        var feedUrl = "https://www.cpagrip.com/common/offer_feed_json.php?user_id=2503429&pubkey=2cc7a70c50150c81bbeac57877526421&offer_type=Email/Zip+Submit&country=user";
+        body { font-family: 'Inter', sans-serif; margin: 0; background-color: var(--background); color: var(--text-dark); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
         
-        $.getJSON(feedUrl, function(json_data){
-            var offer_text = '<ul>';
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .section-padding { padding: 6rem 0; }
+
+        /* Navbar */
+        .navbar { background-color: var(--primary); padding: 1rem 0; position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow-md); }
+        .navbar-content { display: flex; justify-content: space-between; align-items: center; }
+        .navbar-brand { font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--white); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+        .navbar-brand i { color: var(--accent); }
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-link { color: #cbd5e0; text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.3s ease; }
+        .nav-link:hover { color: var(--white); }
+        .btn-cta { background-color: var(--accent); color: white; padding: 0.7rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: background 0.3s ease, transform 0.2s ease; box-shadow: var(--shadow-md); }
+        .btn-cta:hover { background-color: var(--accent-light); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+
+        /* Hero Section */
+        .hero { 
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80') center center/cover no-repeat;
+            color: var(--white); 
+            padding: 8rem 0; 
+            text-align: center; 
+            display: flex;
+            align-items: center;
+            min-height: 60vh;
+            position: relative;
+        }
+        .hero-content { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+        .hero h1 { font-family: 'Poppins', sans-serif; font-size: clamp(2.5rem, 6vw, 4.2rem); margin-bottom: 1.5rem; line-height: 1.2; color: var(--white); }
+        .hero p { font-size: clamp(1rem, 2.5vw, 1.3rem); color: #cbd5e0; margin-bottom: 3rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+        .hero-buttons .btn-cta { margin: 0 0.8rem; }
+
+        /* Features / Why Choose Us */
+        .features-section { background-color: var(--white); }
+        .section-title { font-family: 'Poppins', sans-serif; text-align: center; font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem; }
+        .section-subtitle { text-align: center; font-size: 1.15rem; color: var(--text-light); max-width: 800px; margin: 0 auto 4rem; }
+        
+        .feature-grid { 
+            display: flex; /* Use Flexbox */
+            flex-wrap: wrap; /* Allow wrapping */
+            gap: 2rem; 
+            justify-content: center; /* Center cards */
+        }
+        
+        .feature-card { 
+            background: var(--background); 
+            padding: 2.5rem; 
+            border-radius: 8px; 
+            border: 1px solid var(--border); 
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+            box-shadow: var(--shadow-md); 
             
-            $.each(json_data.offers, function(key, offer){
-                // This creates a clickable list of offers
-                offer_text += '<li>';
-                offer_text += '<a href="' + offer.offerlink + '" target="_blank">' + offer.title + '</a>';
-                offer_text += '</li>';
-            });
-            
-            offer_text += '</ul>';
-            
-            $(".offer_holder").html(offer_text);
-        });
-    });
-</script>
+            /* THIS MAKES THEM EQUAL SIZE */
+            flex: 1 1 300px; /* Grow, Shrink, Basis */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Pushes content to fill space */
+            align-items: center;
+            text-align: center;
+        }
+        
+        .feature-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: var(--accent); }
+        
+        /* UPDATED: Generic icon/image style for all cards */
+        .feature-card i, .feature-card img {
+            width: 80px; 
+            height: 80px; 
+            object-fit: contain; 
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        .feature-card i {
+            font-size: 3.5rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-<!-- GEO DETECTION: JSONP method loads before page renders, guarantees country -->
-<script>
-// Global callback for JSONP (ip-api.com free JSONP endpoint)
-window._geoReady = false;
-function _ipApiCallback(data) {
-  if (data && data.country && data.status === 'success') {
-    window._geoData = { country: data.country, code: data.countryCode };
-    window._geoReady = true;
-    if (typeof window._applyGeo === 'function') window._applyGeo(data.country, data.countryCode);
-  }
-}
-</script>
-<!-- JSONP script tag — works without fetch, bypasses all CORS issues -->
-<script src="https://ip-api.com/json/?callback=_ipApiCallback&fields=status,country,countryCode" async></script>
+        .feature-card h3 { font-family: 'Poppins', sans-serif; font-size: 1.4rem; margin-bottom: 0.7rem; color: var(--primary); }
+        .feature-card p { font-size: 0.95rem; color: var(--text-light); flex-grow: 1; }
 
-<style>
-:root {
-  --ink:     #0c0e13;
-  --ink-2:   #1e2330;
-  --ink-3:   #3d4358;
-  --ink-4:   #6b7280;
-  --ink-5:   #9ca3af;
-  --border:  #e5e7eb;
-  --border-2:#d1d5db;
-  --bg:      #f9fafb;
-  --surface: #ffffff;
-  --gold:    #b8860b;
-  --gold-lt: #f5f0e8;
-  --gold-bd: #e2d09a;
-  --green:   #166534;
-  --green-lt:#f0fdf4;
-  --green-bd:#bbf7d0;
-  --blue:    #1e40af;
-  --blue-lt: #eff6ff;
-  --blue-bd: #bfdbfe;
-  --r:       8px;
-  --r-md:    12px;
-  --r-lg:    16px;
-  --r-xl:    20px;
-  --sh-sm:   0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
-  --sh-md:   0 4px 12px rgba(0,0,0,.08),0 2px 4px rgba(0,0,0,.04);
-  --sh-lg:   0 12px 32px rgba(0,0,0,.10),0 4px 8px rgba(0,0,0,.05);
-  --sh-xl:   0 20px 48px rgba(0,0,0,.12),0 8px 16px rgba(0,0,0,.06);
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{font-size:16px;scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
-button{cursor:pointer;border:none;background:none;font:inherit}
-.c   {max-width:1080px;margin:0 auto;padding:0 24px}
-.c-sm{max-width:680px;margin:0 auto;padding:0 24px}
-.c-md{max-width:840px;margin:0 auto;padding:0 24px}
+        /* How It Works Section */
+        .how-it-works-section { background-color: var(--background); }
+        
+        /* Updated to match feature-grid style */
+        .how-it-works-grid { 
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 4rem;
+            justify-content: center;
+        }
+        
+        /* Updated to match feature-card style */
+        .how-it-works-step { 
+            text-align: center;
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+            flex: 1 1 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .how-it-works-step img { 
+            width: 100px; /* Fixed size for GIFs */
+            height: 100px; 
+            object-fit: contain;
+            border-radius: 8px; 
+            margin-bottom: 1.5rem;
+        }
+        .how-it-works-step h3 { font-family: 'Poppins', sans-serif; font-size: 1.6rem; color: var(--primary); margin-bottom: 0.8rem; }
+        .how-it-works-step p { color: var(--text-light); flex-grow: 1; }
 
-/* TOP STRIP */
-.top-strip{background:var(--ink);padding:9px 0;text-align:center;font-size:.75rem;color:rgba(255,255,255,.55);letter-spacing:.01em}
-.top-strip span{color:rgba(255,255,255,.85);font-weight:500}
-.live-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#4ade80;margin-right:7px;vertical-align:middle;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(74,222,128,.4)}50%{opacity:.7;box-shadow:0 0 0 4px rgba(74,222,128,0)}}
+        /* Testimonials Section */
+        .testimonials-section { background-color: var(--white); }
+        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 4rem; }
+        .testimonial-card { background: var(--background); padding: 2.5rem; border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-md); display: flex; flex-direction: column; justify-content: space-between; }
+        .testimonial-quote { font-style: italic; color: var(--text-dark); margin-bottom: 1.5rem; font-size: 1.05rem; }
+        .testimonial-author { display: flex; align-items: center; gap: 1rem; margin-top: auto; }
+        .author-avatar { width: 50px; height: 50px; border-radius: 50%; background-color: var(--accent); color: var(--white); display: flex; align-items: center; justify-content: center; font-weight: 600; flex-shrink: 0; }
+        .author-info strong { display: block; font-weight: 600; color: var(--primary); }
+        .author-info span { font-size: 0.85rem; color: var(--text-light); }
+        .stars { color: #f6e05e; margin-bottom: 0.8rem; } /* Yellow stars */
 
-/* NAV */
-.nav{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200}
-.nav__inner{display:flex;align-items:center;justify-content:space-between;height:64px}
-.nav__logo{display:flex;align-items:center;gap:10px;font-family:'Sora',sans-serif;font-weight:700;font-size:1.1rem;color:var(--ink)}
-.nav__logo-mark{width:34px;height:34px;border-radius:8px;background:var(--ink);display:flex;align-items:center;justify-content:center}
-.nav__links{display:flex;align-items:center;gap:32px;list-style:none}
-.nav__links a{font-size:.875rem;font-weight:500;color:var(--ink-4);transition:color .15s}
-.nav__links a:hover{color:var(--ink)}
-.nav__right{display:flex;align-items:center;gap:10px}
-.nav-btn-ghost{padding:8px 16px;border-radius:var(--r);border:1.5px solid var(--border-2);font-size:.875rem;font-weight:600;color:var(--ink-3);background:transparent;transition:border-color .15s,color .15s;cursor:pointer;display:inline-block}
-.nav-btn-ghost:hover{border-color:var(--ink-3);color:var(--ink)}
-.nav-btn-dark{padding:8px 18px;border-radius:var(--r);background:var(--ink);font-size:.875rem;font-weight:600;color:#fff;transition:background .15s,transform .1s;cursor:pointer;display:inline-block}
-.nav-btn-dark:hover{background:var(--ink-2);transform:translateY(-1px)}
+        /* Final CTA */
+        .final-cta { 
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%); /* Blue to Dark Blue gradient */
+            color: var(--white); 
+            padding: 6rem 0; 
+            text-align: center; 
+        }
+        .final-cta h2 { color: var(--white); font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 1.5rem; font-family: 'Poppins', sans-serif; }
+        .final-cta p { color: #e2e8f0; font-size: 1.15rem; max-width: 800px; margin: 0 auto 2.5rem; }
 
-/* TRUST BAR */
-.trust-bar{background:var(--gold-lt);border-bottom:1px solid var(--gold-bd);padding:11px 0}
-.trust-bar__inner{display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap}
-.trust-item{display:flex;align-items:center;gap:7px;font-size:.78rem;font-weight:500;color:#78350f}
+        /* Footer */
+        .footer { background-color: var(--primary-light); color: #cbd5e0; padding: 4rem 0; font-size: 0.9rem; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 3rem; }
+        .footer-col h4 { color: var(--white); font-size: 1.1rem; margin-bottom: 1rem; font-family: 'Poppins', sans-serif; }
+        .footer-col ul { list-style: none; padding: 0; }
+        .footer-col ul li { margin-bottom: 0.7rem; }
+        .footer-col ul li a { color: #cbd5e0; transition: color 0.3s ease; }
+        .footer-col ul li a:hover { color: var(--white); }
+        .footer-bottom { border-top: 1px solid #4a5568; padding-top: 2rem; text-align: center; }
 
-/* HERO */
-.hero{background:var(--surface);border-bottom:1px solid var(--border);padding:72px 0 68px;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:0;right:0;bottom:0;width:48%;background:var(--bg);border-left:1px solid var(--border)}
-.hero__inner{display:grid;grid-template-columns:1fr 430px;gap:64px;align-items:start;position:relative;z-index:1}
-.hero__kicker{display:inline-flex;align-items:center;gap:8px;padding:5px 12px;border-radius:100px;background:var(--green-lt);border:1px solid var(--green-bd);font-size:.72rem;font-weight:600;color:var(--green);letter-spacing:.06em;text-transform:uppercase;margin-bottom:22px}
-.kicker-dot{width:6px;height:6px;border-radius:50%;background:#16a34a;animation:pulse 2s infinite}
-.hero__h1{font-family:'Sora',sans-serif;font-size:clamp(2rem,3.8vw,3.1rem);font-weight:800;line-height:1.13;letter-spacing:-.03em;color:var(--ink);margin-bottom:20px}
-.hero__h1 span{position:relative}
-.hero__h1 span::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:3px;background:var(--gold);border-radius:2px}
-.hero__lead{font-size:1rem;color:var(--ink-3);line-height:1.75;max-width:460px;margin-bottom:36px}
-.hero__cta-group{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:36px}
-.cta-main{display:inline-flex;align-items:center;gap:9px;padding:14px 26px;border-radius:var(--r);background:var(--ink);font-family:'Sora',sans-serif;font-size:.95rem;font-weight:700;color:#fff;box-shadow:0 4px 16px rgba(12,14,19,.25);transition:background .15s,box-shadow .15s,transform .1s;text-decoration:none}
-.cta-main:hover{background:var(--ink-2);box-shadow:0 6px 24px rgba(12,14,19,.3);transform:translateY(-2px)}
-.cta-main svg{transition:transform .15s}
-.cta-main:hover svg{transform:translateX(3px)}
-.cta-sub-text{font-size:.8rem;color:var(--ink-5);display:flex;align-items:center;gap:6px}
-.hero__proof{display:flex;align-items:center;padding-top:28px;border-top:1px solid var(--border)}
-.proof-avatars{display:flex;margin-right:14px}
-.proof-avatar{width:30px;height:30px;border-radius:50%;border:2px solid var(--surface);background:var(--border);margin-left:-8px;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:var(--ink-3)}
-.proof-avatar:first-child{margin-left:0}
-.proof-text{font-size:.8rem;color:var(--ink-4)}
-.proof-text strong{color:var(--ink);font-weight:600}
+        /* Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Delay for staggered animation */
+        .fade-in-up.delay-1 { transition-delay: 0.1s; }
+        .fade-in-up.delay-2 { transition-delay: 0.2s; }
+        .fade-in-up.delay-3 { transition-delay: 0.3s; }
+        .fade-in-up.delay-4 { transition-delay: 0.4s; }
+        .fade-in-up.delay-5 { transition-delay: 0.5s; }
 
-/* PORTAL CARD */
-.portal-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);box-shadow:var(--sh-xl);overflow:hidden;animation:slideUp .55s cubic-bezier(.22,.68,0,1.15) .1s both}
-@keyframes slideUp{from{opacity:0;transform:translateY(28px) scale(.98)}to{opacity:1;transform:none}}
-.pc-header{padding:18px 20px;background:var(--ink);display:flex;align-items:center;justify-content:space-between}
-.pc-header__left{display:flex;align-items:center;gap:10px}
-.pc-title{font-family:'Sora',sans-serif;font-size:.9rem;font-weight:700;color:#fff}
-.pc-sub{font-size:.72rem;color:rgba(255,255,255,.5);margin-top:2px}
-.pc-badge-live{display:flex;align-items:center;gap:6px;padding:4px 10px;border-radius:100px;background:rgba(74,222,128,.12);border:1px solid rgba(74,222,128,.25);font-size:.68rem;font-weight:700;color:#4ade80;letter-spacing:.06em;text-transform:uppercase}
-.pc-badge-live .bdot{width:5px;height:5px;border-radius:50%;background:#4ade80;animation:pulse 2s infinite;display:inline-block}
-
-/* GEO WIDGET */
-.pc-geo{padding:14px 20px 16px;border-bottom:1px solid var(--border);background:var(--bg)}
-.pc-geo__label{font-size:.68rem;font-weight:600;color:var(--ink-5);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
-.pc-geo__row{display:flex;align-items:center;gap:10px;min-height:34px}
-.pc-geo__flag{font-size:1.5rem;line-height:1;transition:all .3s ease}
-.pc-geo__country{font-family:'Sora',sans-serif;font-size:1.05rem;font-weight:700;color:var(--ink);transition:all .3s ease}
-.pc-geo__note{margin-top:5px;font-size:.75rem;color:var(--ink-4);transition:all .3s ease}
-.pc-geo__note strong{color:var(--blue);font-weight:600}
-
-/* Shimmer placeholder */
-.shimmer{display:inline-block;border-radius:4px;background:linear-gradient(90deg,#ebebeb 25%,#f5f5f5 50%,#ebebeb 75%);background-size:200% 100%;animation:sh 1.3s infinite}
-.sh-country{width:150px;height:20px}
-.sh-note{width:220px;height:13px;margin-top:5px}
-@keyframes sh{from{background-position:200% 0}to{background-position:-200% 0}}
-
-.pc-progress{padding:16px 20px;border-bottom:1px solid var(--border)}
-.pc-progress__label{font-size:.68rem;font-weight:600;color:var(--ink-5);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;display:flex;justify-content:space-between}
-.pc-progress__label span{color:var(--ink-3);font-weight:500;letter-spacing:0;text-transform:none}
-.progress-track{height:6px;background:var(--border);border-radius:100px;overflow:hidden}
-.progress-fill{height:100%;width:33%;background:var(--ink);border-radius:100px;transition:width .8s ease}
-
-.pc-steps{padding:16px 20px;border-bottom:1px solid var(--border)}
-.pc-step{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border-radius:var(--r);margin-bottom:8px;border:1px solid var(--border);background:var(--bg);position:relative;transition:border-color .2s,box-shadow .2s}
-.pc-step:last-child{margin-bottom:0}
-.pc-step--active{border-color:var(--ink);background:var(--surface);box-shadow:var(--sh-sm)}
-.pc-step--done{opacity:.55}
-.pc-step__num{width:26px;height:26px;flex-shrink:0;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;font-family:'Sora',sans-serif}
-.sn-done{background:var(--green-lt);border:1px solid var(--green-bd);color:var(--green)}
-.sn-active{background:var(--ink);color:#fff}
-.sn-wait{background:var(--border);border:1px solid var(--border-2);color:var(--ink-5)}
-.pc-step__body h4{font-size:.84rem;font-weight:600;color:var(--ink);line-height:1.3}
-.pc-step__body p{font-size:.74rem;color:var(--ink-4);margin-top:2px;line-height:1.5}
-.pc-step__arrow{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--ink-5);font-size:.75rem}
-.pc-step--active .pc-step__arrow{color:var(--ink)}
-
-.pc-cta-wrap{padding:16px 20px 18px}
-.pc-cta{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;padding:15px 20px;border-radius:var(--r);background:var(--ink);font-family:'Sora',sans-serif;font-size:.97rem;font-weight:700;color:#fff;box-shadow:0 4px 16px rgba(12,14,19,.25);transition:background .15s,transform .1s,box-shadow .15s;text-decoration:none}
-.pc-cta:hover{background:var(--ink-2);transform:translateY(-2px);box-shadow:0 6px 24px rgba(12,14,19,.3)}
-.pc-security{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:12px;flex-wrap:wrap}
-.pc-security span{display:flex;align-items:center;gap:5px;font-size:.7rem;color:var(--ink-5);font-weight:500}
-
-/* DIVIDER STATS */
-.divider-section{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:24px 0}
-.stats-row{display:flex;align-items:stretch;justify-content:center;flex-wrap:wrap}
-.stat-block{padding:12px 40px;border-right:1px solid var(--border);text-align:center}
-.stat-block:last-child{border-right:none}
-.stat-val{font-family:'Sora',sans-serif;font-size:1.7rem;font-weight:800;color:var(--ink);line-height:1}
-.stat-lbl{font-size:.75rem;color:var(--ink-5);margin-top:4px;font-weight:500}
-
-/* SECTIONS */
-.section{padding:72px 0}
-.section--gray{background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.section--white{background:var(--surface)}
-.s-eyebrow{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:100px;background:var(--surface);border:1px solid var(--border);font-size:.7rem;font-weight:600;color:var(--ink-4);letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
-.s-title{font-family:'Sora',sans-serif;font-size:clamp(1.6rem,2.8vw,2.3rem);font-weight:800;letter-spacing:-.03em;color:var(--ink);margin-bottom:10px;line-height:1.2}
-.s-sub{font-size:.95rem;color:var(--ink-4);max-width:520px;line-height:1.75}
-
-/* HOW IT WORKS */
-.hiw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:48px;background:var(--border);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
-.hiw-cell{background:var(--surface);padding:32px 28px;transition:background .2s}
-.hiw-cell:hover{background:var(--bg)}
-.hiw-num{font-family:'Sora',sans-serif;font-size:3.5rem;font-weight:800;color:var(--border);line-height:1;margin-bottom:20px;letter-spacing:-.04em}
-.hiw-icon{width:44px;height:44px;border-radius:var(--r-md);background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:1.2rem}
-.hiw-cell h3{font-family:'Sora',sans-serif;font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:8px}
-.hiw-cell p{font-size:.84rem;color:var(--ink-4);line-height:1.65}
-
-/* TRUST GRID */
-.trust-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:44px}
-.trust-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:24px;display:flex;gap:16px;align-items:flex-start;transition:box-shadow .2s,border-color .2s}
-.trust-card:hover{box-shadow:var(--sh-md);border-color:var(--border-2)}
-.trust-icon{width:40px;height:40px;flex-shrink:0;border-radius:var(--r);background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.1rem}
-.trust-card h3{font-family:'Sora',sans-serif;font-size:.9rem;font-weight:700;color:var(--ink);margin-bottom:5px}
-.trust-card p{font-size:.8rem;color:var(--ink-4);line-height:1.6}
-
-/* TESTIMONIALS */
-.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
-.testi-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:22px 20px}
-.testi-stars{font-size:.85rem;letter-spacing:.06em;margin-bottom:10px}
-.testi-quote{font-size:.84rem;color:var(--ink-3);line-height:1.65;margin-bottom:14px;font-style:italic}
-.testi-author{display:flex;align-items:center;gap:10px}
-.testi-avatar{width:32px;height:32px;border-radius:50%;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:var(--ink-3)}
-.testi-name{font-size:.8rem;font-weight:600;color:var(--ink)}
-.testi-meta{font-size:.72rem;color:var(--ink-5)}
-
-/* BOTTOM CTA */
-.bottom-cta{background:var(--ink);padding:72px 0;text-align:center;position:relative;overflow:hidden}
-.bottom-cta h2{font-family:'Sora',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;letter-spacing:-.03em;color:#fff;margin-bottom:12px;line-height:1.15}
-.bottom-cta p{font-size:.95rem;color:rgba(255,255,255,.5);max-width:480px;margin:0 auto 36px;line-height:1.75}
-.bottom-cta__geo-line{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:100px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);font-size:.82rem;color:rgba(255,255,255,.65);margin-bottom:28px}
-.bottom-cta__geo-line strong{color:rgba(255,255,255,.9)}
-.cta-main-light{display:inline-flex;align-items:center;gap:9px;padding:15px 32px;border-radius:var(--r);background:var(--surface);font-family:'Sora',sans-serif;font-size:1rem;font-weight:700;color:var(--ink);box-shadow:0 4px 20px rgba(0,0,0,.3);transition:box-shadow .15s,transform .1s;text-decoration:none}
-.cta-main-light:hover{box-shadow:0 8px 32px rgba(0,0,0,.4);transform:translateY(-2px)}
-.cta-main-light svg{transition:transform .15s}
-.cta-main-light:hover svg{transform:translateX(3px)}
-.bottom-cta__note{margin-top:18px;font-size:.76rem;color:rgba(255,255,255,.25)}
-
-/* FAQ */
-.faq{max-width:680px;margin:44px auto 0}
-.faq-item{border:1px solid var(--border);border-radius:var(--r-md);background:var(--surface);margin-bottom:8px;overflow:hidden}
-.faq-btn{width:100%;display:flex;align-items:center;justify-content:space-between;padding:17px 20px;text-align:left;cursor:pointer;font-family:'Sora',sans-serif;font-size:.9rem;font-weight:700;color:var(--ink);transition:background .15s;background:transparent;border:none}
-.faq-btn:hover{background:var(--bg)}
-.faq-icon{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--border-2);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .25s,border-color .15s;color:var(--ink-4)}
-.faq-item.open .faq-icon{transform:rotate(45deg);border-color:var(--ink-3);color:var(--ink)}
-.faq-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
-.faq-item.open .faq-body{max-height:160px}
-.faq-inner{padding:0 20px 17px;font-size:.855rem;color:var(--ink-3);line-height:1.75}
-
-/* LOGOS */
-.logos-row{background:var(--surface);border-bottom:1px solid var(--border);padding:20px 0}
-.logos-row__inner{display:flex;align-items:center;justify-content:center;flex-wrap:wrap}
-.logos-label{font-size:.72rem;font-weight:600;color:var(--ink-5);letter-spacing:.08em;text-transform:uppercase;padding-right:24px;border-right:1px solid var(--border);margin-right:24px;white-space:nowrap;flex-shrink:0}
-.logos-items{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
-.logo-chip{display:flex;align-items:center;gap:7px;font-size:.8rem;font-weight:600;color:var(--ink-4);opacity:.7;transition:opacity .15s}
-.logo-chip:hover{opacity:1}
-.logo-chip-dot{width:24px;height:24px;border-radius:6px;border:1px solid var(--border);background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:.8rem}
-
-/* FOOTER */
-.footer{background:var(--ink-2);padding:48px 0 28px}
-.footer__grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:36px;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.08)}
-.footer__brand-name{display:flex;align-items:center;gap:9px;font-family:'Sora',sans-serif;font-weight:700;font-size:1.05rem;color:#fff;margin-bottom:10px}
-.footer__brand-mark{width:30px;height:30px;border-radius:7px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center}
-.footer__brand p{font-size:.78rem;color:rgba(255,255,255,.35);line-height:1.7;max-width:240px}
-.footer__col h4{font-size:.72rem;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
-.footer__col ul{list-style:none}
-.footer__col li{margin-bottom:9px}
-.footer__col a{font-size:.8rem;color:rgba(255,255,255,.38);transition:color .15s}
-.footer__col a:hover{color:rgba(255,255,255,.75)}
-.footer__bottom{display:flex;align-items:flex-start;justify-content:space-between;padding-top:24px;gap:20px;flex-wrap:wrap}
-.footer__copy{font-size:.72rem;color:rgba(255,255,255,.22);line-height:1.75;max-width:620px}
-.footer__legal{display:flex;gap:14px;flex-wrap:wrap;flex-shrink:0}
-.footer__legal a{font-size:.72rem;color:rgba(255,255,255,.3);transition:color .15s}
-.footer__legal a:hover{color:rgba(255,255,255,.65)}
-
-/* REVEAL ANIMATION */
-.reveal{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
-.reveal.visible{opacity:1;transform:none}
-
-/* RESPONSIVE */
-@media(max-width:960px){
-  .hero::before{display:none}
-  .hero__inner{grid-template-columns:1fr;gap:40px}
-  .portal-card{max-width:500px}
-  .hiw-grid{grid-template-columns:1fr}
-  .testi-grid{grid-template-columns:1fr}
-  .footer__grid{grid-template-columns:1fr 1fr}
-  .nav__links{display:none}
-  .stat-block{padding:12px 24px}
-}
-@media(max-width:640px){
-  .hero{padding:48px 0 44px}
-  .trust-bar__inner{gap:16px}
-  .trust-grid{grid-template-columns:1fr}
-  .stats-row{flex-direction:column;align-items:stretch;text-align:center}
-  .stat-block{border-right:none;border-bottom:1px solid var(--border)}
-  .stat-block:last-child{border-bottom:none}
-  .footer__grid{grid-template-columns:1fr}
-  .footer__bottom{flex-direction:column}
-  .logos-label{display:none}
-  .section{padding:52px 0}
-}
-</style>
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar-brand { font-size: 1.4rem; }
+            .nav-links { display: none; } /* Could be replaced with a hamburger menu for mobile */
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1rem; }
+            .hero-buttons .btn-cta { display: block; margin: 1rem auto; width: 80%; }
+            .section-title { font-size: 2rem; }
+            .section-subtitle { font-size: 1rem; }
+        }
+    </style>
 </head>
 <body>
 
-<div class="top-strip">
-  <span class="live-dot"></span>
-  <span>Official Partner Portal</span> — Reward access programs are currently active for verified visitors in your region
-</div>
-
-<nav class="nav">
-  <div class="c">
-    <div class="nav__inner">
-      <div class="nav__logo">
-        <div class="nav__logo-mark">
-          <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 2l2.4 4.8 5.3.8-3.85 3.75.91 5.3L10 14.1l-4.76 2.55.91-5.3L2.3 7.6l5.3-.8L10 2z" fill="#f5c842" stroke="#f5c842" stroke-width=".5" stroke-linejoin="round"/></svg>
-        </div>
-        RewardHub
-      </div>
-      <ul class="nav__links">
-        <li><a href="#how-it-works">How It Works</a></li>
-        <li><a href="#why-trust">Why RewardHub</a></li>
-        <li><a href="#faq">FAQ</a></li>
-      </ul>
-      <div class="nav__right">
-        <a href="#how-it-works" class="nav-btn-ghost">Learn More</a>
-        <a href="https://doctoredits.com/show.php?l=0&u=2503429&id=73210" class="nav-btn-dark" data-interact-trigger data-tool-id="62672">Access Portal →</a>
-      </div>
-    </div>
-  </div>
-</nav>
-
-<div class="trust-bar">
-  <div class="c">
-    <div class="trust-bar__inner">
-      <div class="trust-item">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1.5L2 4v4c0 3.5 2.5 6.3 6 7 3.5-.7 6-3.5 6-7V4L8 1.5z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
-        256-bit Encrypted Portal
-      </div>
-      <div class="trust-item">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 8.5l2 2 3-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Verified Partner Network
-      </div>
-      <div class="trust-item">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 2C4.7 2 2 4.7 2 8s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6z" stroke="currentColor" stroke-width="1.4"/><path d="M8 5v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-        Real-Time Region Matching
-      </div>
-      <div class="trust-item">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2.5 8.5l4 4 7-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        100,000+ Members Verified
-      </div>
-    </div>
-  </div>
-</div>
-
-<section class="hero">
-  <div class="c">
-    <div class="hero__inner">
-      <div>
-        <div class="hero__kicker">
-          <span class="kicker-dot"></span>
-          Partner Programs Active
-        </div>
-        <h1 class="hero__h1">
-          Your region has<br>
-          active <span>reward programs</span><br>
-          available right now
-        </h1>
-        <p class="hero__lead">
-          RewardHub is an official partner portal that matches verified visitors with digital reward programs available in their detected region. Complete the short partner verification process to unlock access.
-        </p>
-        <div class="hero__cta-group">
-          <a href="https://doctoredits.com/show.php?l=0&u=2503429&id=73210" class="cta-main" data-interact-trigger data-tool-id="62672">
-            Begin Verification Process
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </div>
-        <div class="cta-sub-text">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="color:#16a34a"><path d="M8 1.5L2 4v4c0 3.5 2.5 6.3 6 7 3.5-.7 6-3.5 6-7V4L8 1.5z"/></svg>
-          Secure process. Partner verification steps required to unlock offers.
-        </div>
-        <div class="hero__proof">
-          <div class="proof-avatars">
-            <div class="proof-avatar">JM</div>
-            <div class="proof-avatar">AK</div>
-            <div class="proof-avatar">RL</div>
-            <div class="proof-avatar">SK</div>
-            <div class="proof-avatar">+</div>
-          </div>
-          <div class="proof-text">
-            <strong>Over 100,000 members</strong> have completed verification and accessed available reward programs through this portal
-          </div>
-        </div>
-      </div>
-
-      <!-- PORTAL CARD -->
-      <div>
-        <div class="portal-card">
-          <div class="pc-header">
-            <div class="pc-header__left">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="5" width="16" height="12" rx="2.5" stroke="white" stroke-width="1.5"/><path d="M6 5V4a4 4 0 018 0v1" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
-              <div>
-                <div class="pc-title">Partner Verification Portal</div>
-                <div class="pc-sub">Official RewardHub access system</div>
-              </div>
-            </div>
-            <div class="pc-badge-live"><span class="bdot"></span> Live</div>
-          </div>
-
-          <div class="pc-geo">
-            <div class="pc-geo__label">Detected Region</div>
-            <div class="pc-geo__row">
-              <span class="pc-geo__flag" id="geoFlag">🌐</span>
-              <span class="pc-geo__country" id="geoCountry"><span class="shimmer sh-country"></span></span>
-            </div>
-            <div class="pc-geo__note" id="geoNote"><span class="shimmer sh-note"></span></div>
-          </div>
-
-          <div class="pc-progress">
-            <div class="pc-progress__label">Verification Progress <span id="progressPct">Step 1 of 3</span></div>
-            <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-          </div>
-
-          <div class="pc-steps">
-            <div class="pc-step pc-step--done">
-              <div class="pc-step__num sn-done">
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </div>
-              <div class="pc-step__body"><h4>Region Confirmed</h4><p>Your location has been detected and verified</p></div>
-              <div class="pc-step__arrow">✓</div>
-            </div>
-            <div class="pc-step pc-step--active">
-              <div class="pc-step__num sn-active">2</div>
-              <div class="pc-step__body"><h4>Partner Verification — Required</h4><p>Complete partner steps to confirm eligibility</p></div>
-              <div class="pc-step__arrow">→</div>
-            </div>
-            <div class="pc-step">
-              <div class="pc-step__num sn-wait">3</div>
-              <div class="pc-step__body"><h4>Reward Program Access</h4><p>Unlock digital reward offers for your region</p></div>
-              <div class="pc-step__arrow">—</div>
-            </div>
-          </div>
-
-          <div class="pc-cta-wrap">
-            <a href="https://doctoredits.com/show.php?l=0&u=2503429&id=73210" class="pc-cta" data-interact-trigger data-tool-id="62672">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="4" width="14" height="10" rx="2" stroke="white" stroke-width="1.5"/><path d="M5 4V3a3 3 0 016 0v1" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
-              Continue Verification →
+    <nav class="navbar">
+        <div class="container navbar-content">
+            <a href="#" class="navbar-brand">
+                <i class="fas fa-gem"></i> RewardHub
             </a>
-            <div class="pc-security">
-              <span>
-                <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 1.5L2 4v4c0 3.5 2.5 6.3 6 7 3.5-.7 6-3.5 6-7V4L8 1.5z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
-                SSL Secured
-              </span>
-              <span>
-                <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 8.5l2 2 3-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                Verified Partners
-              </span>
-              <span>
-                <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M5 8h6M8 5v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-                No hidden fees
-              </span>
+            <div class="nav-links">
+                <a href="#features" class="nav-link">Why Choose Us</a>
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <a href="#testimonials" class="nav-link">Testimonials</a>
+                <a href="https://doctoredits.com/1879947" class="btn-cta">Start Earning Today <i class="fas fa-arrow-right"></i></a>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </nav>
 
-<div class="logos-row">
-  <div class="c">
-    <div class="logos-row__inner">
-      <div class="logos-label">Partner Network</div>
-      <div class="logos-items">
-        <div class="logo-chip"><div class="logo-chip-dot">🎁</div> GiftRewards</div>
-        <div class="logo-chip"><div class="logo-chip-dot">📦</div> PromoVault</div>
-        <div class="logo-chip"><div class="logo-chip-dot">💳</div> OfferLink</div>
-        <div class="logo-chip"><div class="logo-chip-dot">🛍️</div> DealPort</div>
-        <div class="logo-chip"><div class="logo-chip-dot">🎯</div> TargetPerks</div>
-        <div class="logo-chip"><div class="logo-chip-dot">🔗</div> LinkReward</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="divider-section">
-  <div class="c">
-    <div class="stats-row">
-      <div class="stat-block reveal"><div class="stat-val">200+</div><div class="stat-lbl">Active partner programs</div></div>
-      <div class="stat-block reveal"><div class="stat-val">150+</div><div class="stat-lbl">Supported countries</div></div>
-      <div class="stat-block reveal"><div class="stat-val">100K+</div><div class="stat-lbl">Verified members</div></div>
-      <div class="stat-block reveal"><div class="stat-val">4.8/5</div><div class="stat-lbl">Average program rating</div></div>
-    </div>
-  </div>
-</div>
-
-<section class="section section--white" id="how-it-works">
-  <div class="c">
-    <div class="s-eyebrow">Process Overview</div>
-    <h2 class="s-title">How partner verification works</h2>
-    <p class="s-sub">Three straightforward steps to confirm your eligibility and access available reward programs in your region.</p>
-    <div class="hiw-grid">
-      <div class="hiw-cell reveal">
-        <div class="hiw-num">01</div>
-        <div class="hiw-icon">🌍</div>
-        <h3>Region Detection</h3>
-        <p>Your IP address is used to detect your region and match it against available partner programs. This happens automatically when you visit the portal.</p>
-      </div>
-      <div class="hiw-cell reveal">
-        <div class="hiw-num">02</div>
-        <div class="hiw-icon">📋</div>
-        <h3>Partner Verification</h3>
-        <p>You'll complete a short partner-defined verification process. This confirms your eligibility and is required by our partner network before access is granted.</p>
-      </div>
-      <div class="hiw-cell reveal">
-        <div class="hiw-num">03</div>
-        <div class="hiw-icon">🔓</div>
-        <h3>Access Unlocked</h3>
-        <p>Once verification is complete, you gain direct access to the digital reward programs available in your area through our partner network.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section section--gray" id="why-trust">
-  <div class="c">
-    <div class="s-eyebrow">Platform Standards</div>
-    <h2 class="s-title">Why visitors trust RewardHub</h2>
-    <p class="s-sub">We operate a transparent, secure partner portal built on four core commitments to every visitor.</p>
-    <div class="trust-grid">
-      <div class="trust-card reveal">
-        <div class="trust-icon">🔒</div>
-        <div><h3>Bank-Level Encryption</h3><p>All data transmitted through the portal uses 256-bit SSL encryption. Your information is never shared with third parties outside the verified partner network.</p></div>
-      </div>
-      <div class="trust-card reveal">
-        <div class="trust-icon">✅</div>
-        <div><h3>Vetted Partner Network</h3><p>Every program on RewardHub comes from a vetted and approved partner. We review and maintain standards across our entire network on an ongoing basis.</p></div>
-      </div>
-      <div class="trust-card reveal">
-        <div class="trust-icon">🌍</div>
-        <div><h3>Accurate Region Matching</h3><p>Our system uses reliable IP geolocation to ensure you only see programs genuinely available in your country. No bait-and-switch, no irrelevant offers.</p></div>
-      </div>
-      <div class="trust-card reveal">
-        <div class="trust-icon">📄</div>
-        <div><h3>Transparent Terms</h3><p>We are upfront: access to this portal is free. Partner programs may have their own steps. No outcomes are guaranteed. Everything is disclosed before you proceed.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section section--white">
-  <div class="c">
-    <div class="s-eyebrow">Member Experiences</div>
-    <h2 class="s-title">What verified members say</h2>
-    <div class="testi-grid">
-      <div class="testi-card reveal">
-        <div class="testi-stars">★★★★★</div>
-        <div class="testi-quote">"The verification process was straightforward and took less than 5 minutes. The portal clearly explained each step before I started."</div>
-        <div class="testi-author"><div class="testi-avatar">JM</div><div><div class="testi-name">James M.</div><div class="testi-meta">Verified Member · United States</div></div></div>
-      </div>
-      <div class="testi-card reveal">
-        <div class="testi-stars">★★★★★</div>
-        <div class="testi-quote">"I appreciated that the site was transparent about what the partner steps involved. No surprises. Exactly what it said it was."</div>
-        <div class="testi-author"><div class="testi-avatar">AK</div><div><div class="testi-name">Amara K.</div><div class="testi-meta">Verified Member · United Kingdom</div></div></div>
-      </div>
-      <div class="testi-card reveal">
-        <div class="testi-stars">★★★★☆</div>
-        <div class="testi-quote">"Clean, professional portal. The region detection worked correctly, which made the whole process feel more legitimate compared to other sites."</div>
-        <div class="testi-author"><div class="testi-avatar">RL</div><div><div class="testi-name">Rafael L.</div><div class="testi-meta">Verified Member · Canada</div></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="bottom-cta">
-  <div class="c-sm">
-    <div class="bottom-cta__geo-line">
-      <span id="ctaGeoFlag">🌐</span>
-      Programs available for visitors from <strong id="ctaGeoCountry">your region</strong>
-    </div>
-    <h2>Ready to complete your verification?</h2>
-    <p>Access to the portal is free. Partner verification steps are required to unlock the reward programs available in your detected region.</p>
-    <a href="https://doctoredits.com/show.php?l=0&u=2503429&id=73210" class="cta-main-light" data-interact-trigger data-tool-id="62672">
-      Begin Partner Verification
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
-    <div class="bottom-cta__note">No guaranteed outcomes · Regional availability varies · Partner terms apply</div>
-  </div>
-</section>
-
-<section class="section section--gray" id="faq">
-  <div class="c-sm">
-    <div style="text-align:center;margin-bottom:14px"><div class="s-eyebrow" style="display:inline-flex">Frequently Asked Questions</div></div>
-    <h2 class="s-title" style="text-align:center">Common questions</h2>
-    <div class="faq">
-      <div class="faq-item">
-        <button class="faq-btn" onclick="faqToggle(this)">What exactly is RewardHub?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 2.5l3 3 3-3M5 5.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
-        <div class="faq-body"><div class="faq-inner">RewardHub is an independent partner portal that connects eligible visitors with third-party digital reward and incentive programs. We verify your region, match you with available programs, and facilitate access through our partner network. We do not operate the reward programs directly.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-btn" onclick="faqToggle(this)">Why is partner verification required?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 2.5l3 3 3-3M5 5.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
-        <div class="faq-body"><div class="faq-inner">Our partner programs require eligibility verification before granting access. This is a standard industry requirement that helps partners ensure the quality and legitimacy of their user base. The steps are defined entirely by the partner — not by RewardHub.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-btn" onclick="faqToggle(this)">How does region detection work?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 2.5l3 3 3-3M5 5.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
-        <div class="faq-body"><div class="faq-inner">We use IP-based geolocation to detect your country automatically. This allows us to show only the partner programs that are genuinely active and available for visitors from your specific region, ensuring relevance and accuracy.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-btn" onclick="faqToggle(this)">Is using this portal free?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 2.5l3 3 3-3M5 5.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
-        <div class="faq-body"><div class="faq-inner">Yes. Accessing the RewardHub portal itself is completely free. Individual partner programs may include their own steps or requirements as part of their verification process. These are always clearly communicated before you proceed.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-btn" onclick="faqToggle(this)">Are rewards or payouts guaranteed?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 2.5l3 3 3-3M5 5.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
-        <div class="faq-body"><div class="faq-inner">No. RewardHub does not guarantee any specific rewards, payments, or outcomes. Program terms, eligibility requirements, and reward fulfillment are entirely controlled by the individual partner programs, and results will vary depending on the partner and your region.</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="c">
-    <div class="footer__grid">
-      <div class="footer__brand">
-        <div class="footer__brand-name">
-          <div class="footer__brand-mark">
-            <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M10 2l2.4 4.8 5.3.8-3.85 3.75.91 5.3L10 14.1l-4.76 2.55.91-5.3L2.3 7.6l5.3-.8L10 2z" fill="#f5c842" stroke="#f5c842" stroke-width=".5" stroke-linejoin="round"/></svg>
-          </div>
-          RewardHub
+    <header class="hero">
+        <div class="container hero-content fade-in-up">
+            <h1>Your Gateway to High-Value Online Earnings</h1>
+            <p>RewardHub is a premier platform connecting you with exclusive, high-paying offers worldwide. Maximize your income by completing surveys, tasks, and offers tailored for you.</p>
+            <div class="hero-buttons">
+                <a href="https://doctoredits.com/1879947" class="btn-cta">Explore Opportunities <i class="fas fa-arrow-right"></i></a>
+                <a href="#how-it-works" class="btn-cta" style="background-color: transparent; border: 1px solid var(--white); box-shadow: none;">Learn More <i class="fas fa-info-circle"></i></a>
+            </div>
         </div>
-        <p>An independent partner portal connecting eligible visitors with verified third-party reward programs available in their region.</p>
-      </div>
-      <div class="footer__col"><h4>Portal</h4><ul><li><a href="#how-it-works">How It Works</a></li><li><a href="#why-trust">Why RewardHub</a></li><li><a href="#faq">FAQ</a></li></ul></div>
-      <div class="footer__col"><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Use</a></li><li><a href="#">Cookie Policy</a></li><li><a href="#">Disclaimer</a></li></ul></div>
-      <div class="footer__col"><h4>Support</h4><ul><li><a href="#">Contact Us</a></li><li><a href="#">Partner Info</a></li><li><a href="#">Accessibility</a></li></ul></div>
-    </div>
-    <div class="footer__bottom">
-      <p class="footer__copy">© 2025 RewardHub. All rights reserved. RewardHub is an independent portal and is not affiliated with, endorsed by, or officially connected to any specific brand, company, or reward provider. Reward availability, program eligibility, terms, and outcomes are determined solely by individual third-party partner programs. RewardHub makes no guarantee of any specific reward, payment, or outcome. Completion of partner-defined verification steps is required.</p>
-      <div class="footer__legal"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a><a href="#">Disclaimer</a></div>
-    </div>
-  </div>
-</footer>
+    </header>
 
-<script>
-/* ─────────────────────────────────────────
-   GEO DETECTION — 4-layer approach
-   1. JSONP (ip-api.com) — already injected in <head>, fastest
-   2. fetch ipapi.co
-   3. fetch ip-api.com JSON
-   4. fetch ipinfo.io
-   All race simultaneously, first to resolve wins
-───────────────────────────────────────── */
-(function(){
-  var FLAGS = {US:'🇺🇸',GB:'🇬🇧',CA:'🇨🇦',AU:'🇦🇺',DE:'🇩🇪',FR:'🇫🇷',IT:'🇮🇹',ES:'🇪🇸',NL:'🇳🇱',SE:'🇸🇪',NO:'🇳🇴',DK:'🇩🇰',FI:'🇫🇮',PL:'🇵🇱',CH:'🇨🇭',AT:'🇦🇹',BE:'🇧🇪',NZ:'🇳🇿',IE:'🇮🇪',PT:'🇵🇹',BR:'🇧🇷',MX:'🇲🇽',AR:'🇦🇷',JP:'🇯🇵',KR:'🇰🇷',IN:'🇮🇳',ZA:'🇿🇦',SG:'🇸🇬',MY:'🇲🇾',PH:'🇵🇭',NG:'🇳🇬',GH:'🇬🇭',KE:'🇰🇪',TH:'🇹🇭',ID:'🇮🇩',VN:'🇻🇳',PK:'🇵🇰',EG:'🇪🇬',MA:'🇲🇦',CL:'🇨🇱',CO:'🇨🇴',PE:'🇵🇪',RO:'🇷🇴',HU:'🇭🇺',CZ:'🇨🇿',GR:'🇬🇷',TR:'🇹🇷',UA:'🇺🇦',IL:'🇮🇱',SA:'🇸🇦',AE:'🇦🇪',QA:'🇶🇦',MK:'🇲🇰',RS:'🇷🇸',HR:'🇭🇷',BG:'🇧🇬',SK:'🇸🇰',SI:'🇸🇮',EE:'🇪🇪',LV:'🇱🇻',LT:'🇱🇹',LU:'🇱🇺',CY:'🇨🇾',MT:'🇲🇹',IS:'🇮🇸',BA:'🇧🇦',AL:'🇦🇱',MX:'🇲🇽',UY:'🇺🇾',PY:'🇵🇾',BO:'🇧🇴',EC:'🇪🇨',VE:'🇻🇪',GT:'🇬🇹',HN:'🇭🇳',SV:'🇸🇻',CR:'🇨🇷',PA:'🇵🇦',DO:'🇩🇴',CU:'🇨🇺',TW:'🇹🇼',HK:'🇭🇰',MO:'🇲🇴',MN:'🇲🇳',MM:'🇲🇲',KH:'🇰🇭',LA:'🇱🇦',BD:'🇧🇩',LK:'🇱🇰',NP:'🇳🇵',AF:'🇦🇫',IQ:'🇮🇶',IR:'🇮🇷',JO:'🇯🇴',LB:'🇱🇧',SY:'🇸🇾',YE:'🇾🇪',KW:'🇰🇼',OM:'🇴🇲',BH:'🇧🇭',TN:'🇹🇳',DZ:'🇩🇿',LY:'🇱🇾',SD:'🇸🇩',ET:'🇪🇹',SN:'🇸🇳',CM:'🇨🇲',CI:'🇨🇮',ZM:'🇿🇲',ZW:'🇿🇼',MZ:'🇲🇿',AO:'🇦🇴',UG:'🇺🇬',RW:'🇷🇼',TZ:'🇹🇿',ML:'🇲🇱',BF:'🇧🇫',NE:'🇳🇪',TD:'🇹🇩',MR:'🇲🇷',GM:'🇬🇲',GW:'🇬🇼',SL:'🇸🇱',LR:'🇱🇷',TG:'🇹🇬',BJ:'🇧🇯',RU:'🇷🇺',KZ:'🇰🇿',UZ:'🇺🇿',TM:'🇹🇲',KG:'🇰🇬',TJ:'🇹🇯',GE:'🇬🇪',AM:'🇦🇲',AZ:'🇦🇿',BY:'🇧🇾',MD:'🇲🇩',MX:'🇲🇽'};
+    <section id="features" class="features-section section-padding">
+        <div class="container">
+            <h2 class="section-title fade-in-up">Why RewardHub Stands Out</h2>
+            <p class="section-subtitle fade-in-up delay-1">We are committed to providing a reliable and lucrative platform for online earners.</p>
+            <div class="feature-grid">
+                <div class="feature-card fade-in-up delay-2">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <h3>Top-Tier Payouts</h3>
+                    <p>Access exclusive offers with competitive compensation rates, ensuring your time is well-rewarded.</p>
+                </div>
+                <div class="feature-card fade-in-up delay-3">
+                    <i class="fas fa-network-wired"></i>
+                    <h3>Global Access</h3>
+                    <p>Our intelligent system matches you with relevant opportunities available in your country, worldwide.</p>
+                </div>
+                <div class="feature-card fade-in-up delay-4">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Transparent Tracking</h3>
+                    <p>Monitor your earnings and progress with a clear, easy-to-use dashboard.</p>
+                </div>
+                <div class="feature-card fade-in-up delay-5">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Secure & Private</h3>
+                    <p>We prioritize your data security and privacy with robust encryption and policies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  var applied = false;
+    <section id="how-it-works" class="how-it-works-section section-padding">
+        <div class="container">
+            <h2 class="section-title fade-in-up">How Our Platform Works</h2>
+            <p class="section-subtitle fade-in-up delay-1">Getting started with RewardHub is simple and designed for efficiency.</p>
+            <div class="how-it-works-grid">
+                <div class="how-it-works-step fade-in-up delay-2">
+                    <img src="https://i.pinimg.com/originals/54/fc/fa/54fcfae0a2317944fa1b1ececc057a0c.gif" alt="Find Offers">
+                    <h3>1. Find Offers</h3>
+                    <p>Our advanced system will automatically find the best offers for you.</p>
+                </div>
+                <div class="how-it-works-step fade-in-up delay-3">
+                    <img src="https://imgvisuals.com/cdn/shop/products/animated-completion-gradient-ui-icon-861688.gif?v=1697071108" alt="Complete Offers">
+                    <h3>2. Complete Offers</h3>
+                    <p>Engage with surveys, app installs, and market research tasks directly through our system.</p>
+                </div>
+                <div class="how-it-works-step fade-in-up delay-4">
+                    <img src="https://cdn-icons-gif.flaticon.com/19005/19005126.gif" alt="Redeem Rewards">
+                    <h3>3. Redeem Rewards</h3>
+                    <p>Accumulate earnings and securely withdraw funds via your preferred payment method.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  function applyGeo(country, code) {
-    if (applied) return;
-    applied = true;
+    <section id="testimonials" class="testimonials-section section-padding">
+        <div class="container">
+            <h2 class="section-title fade-in-up">What Our Global Members Say</h2>
+            <p class="section-subtitle fade-in-up delay-1">Hear directly from users worldwide who are maximizing their online income with RewardHub.</p>
+            <div class="testimonial-grid">
+                <div class="testimonial-card fade-in-up delay-2">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                    <p class="testimonial-quote">"RewardHub has become my go-to for extra income. The offers are legitimate, and payouts are always on time. Highly recommend!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">S.M</div>
+                        <div class="author-info">
+                            <strong>Sarah M.</strong>
+                            <span>United States</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-in-up delay-3">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="testimonial-quote">"As someone looking for flexible online work, RewardHub exceeded my expectations. Diverse tasks and excellent support."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">A.K</div>
+                        <div class="author-info">
+                            <strong>Alex K.</strong>
+                            <span>Canada</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-in-up delay-4">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                    <p class="testimonial-quote">"I appreciate how RewardHub prioritizes offers relevant to my region. It's efficient and genuinely rewarding."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">D.J</div>
+                        <div class="author-info">
+                            <strong>David J.</strong>
+                            <span>United Kingdom</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    var flag = FLAGS[code] || '🌍';
+    <section id="contact" class="final-cta section-padding">
+        <div class="container fade-in-up">
+            <h2>Ready to Start Earning with Confidence?</h2>
+            <p>Join the RewardHub community today and transform your free time into valuable rewards. Your next earning opportunity is just a click away.</p>
+            <a href="https://doctoredits.com/1879947" class="btn-cta" style="background-color: var(--white); color: var(--primary);">Start Earning Today <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
 
-    // Card geo widget
-    document.getElementById('geoFlag').textContent = flag;
-    document.getElementById('geoCountry').textContent = country;
-    document.getElementById('geoNote').innerHTML =
-      'Partner reward programs <strong style="color:#1e40af">available for visitors from ' + country + '</strong>';
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>About Us</h4>
+                    <ul>
+                        <li><a href="#">Our Mission</a></li>
+                        <li><a href="#">Why RewardHub</a></li>
+                        <li><a href="#">Testimonials</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <p>Stay updated with our latest offers and news!</p>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <a href="#" style="color: var(--white); font-size: 1.2rem;"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" style="color: var(--white); font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: var(--white); font-size: 1.2rem;"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 RewardHub. All rights reserved. | Powered by High-Value Offers</p>
+            </div>
+        </div>
+    </footer>
 
-    // Bottom CTA
-    document.getElementById('ctaGeoFlag').textContent = flag;
-    document.getElementById('ctaGeoCountry').textContent = country;
-  }
+    <script>
+        // JavaScript for "fade-in-up" animation on scroll
+        const faders = document.querySelectorAll('.fade-in-up');
 
-  // Expose for JSONP callback defined in <head>
-  window._applyGeo = applyGeo;
+        const appearOptions = {
+            threshold: 0.2, // Adjust when the element should start animating (0 to 1)
+            rootMargin: "0px 0px -50px 0px" // Start 50px before it hits the bottom
+        };
 
-  // If JSONP already fired before this script ran
-  if (window._geoReady && window._geoData) {
-    applyGeo(window._geoData.country, window._geoData.code);
-  }
+        const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('visible');
+                    appearOnScroll.unobserve(entry.target); // Stop observing once visible
+                }
+            });
+        }, appearOptions);
 
-  // Parallel fetch fallbacks — race all three, first valid wins
-  var sources = [
-    {
-      url: 'https://ipapi.co/json/',
-      parse: function(d) { return d.country_name && d.country_code ? {country:d.country_name, code:d.country_code} : null; }
-    },
-    {
-      url: 'https://ip-api.com/json/?fields=status,country,countryCode',
-      parse: function(d) { return d.status==='success' ? {country:d.country, code:d.countryCode} : null; }
-    },
-    {
-      url: 'https://ipinfo.io/json',
-      parse: function(d) { return d.country ? {country:d.country, code:d.country} : null; }
-    },
-    {
-      url: 'https://freeipapi.com/api/json',
-      parse: function(d) { return d.countryName && d.countryCode ? {country:d.countryName, code:d.countryCode} : null; }
-    }
-  ];
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
 
-  // Country code to name lookup for ipinfo (returns code only)
-  var codeToName = {US:'United States',GB:'United Kingdom',CA:'Canada',AU:'Australia',DE:'Germany',FR:'France',IT:'Italy',ES:'Spain',NL:'Netherlands',SE:'Sweden',NO:'Norway',DK:'Denmark',FI:'Finland',PL:'Poland',CH:'Switzerland',AT:'Austria',BE:'Belgium',NZ:'New Zealand',IE:'Ireland',PT:'Portugal',BR:'Brazil',MX:'Mexico',AR:'Argentina',JP:'Japan',KR:'South Korea',IN:'India',ZA:'South Africa',SG:'Singapore',MY:'Malaysia',PH:'Philippines',NG:'Nigeria',GH:'Ghana',KE:'Kenya',TH:'Thailand',ID:'Indonesia',VN:'Vietnam',PK:'Pakistan',EG:'Egypt',MA:'Morocco',CL:'Chile',CO:'Colombia',PE:'Peru',RO:'Romania',HU:'Hungary',CZ:'Czech Republic',GR:'Greece',TR:'Turkey',UA:'Ukraine',IL:'Israel',SA:'Saudi Arabia',AE:'UAE',RU:'Russia',MK:'North Macedonia',RS:'Serbia',HR:'Croatia',BG:'Bulgaria',SK:'Slovakia',SI:'Slovenia'};
+        // Simple smooth scrolling for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
 
-  sources.forEach(function(src) {
-    fetch(src.url, {cache:'no-store'})
-      .then(function(r){ return r.json(); })
-      .then(function(d){
-        var result = src.parse(d);
-        if (!result) return;
-        // For ipinfo, convert code to name
-        if (!result.country || result.country === result.code) {
-          result.country = codeToName[result.code] || result.code;
-        }
-        if (result.country && result.code) applyGeo(result.country, result.code);
-      })
-      .catch(function(){});
-  });
-
-  // Final fallback: if nothing worked after 5s, show generic
-  setTimeout(function(){
-    if (!applied) {
-      document.getElementById('geoFlag').textContent = '🌍';
-      document.getElementById('geoCountry').textContent = 'Your Country';
-      document.getElementById('geoNote').innerHTML = 'Partner reward programs <strong style="color:#1e40af">available in your region</strong>';
-      document.getElementById('ctaGeoCountry').textContent = 'your region';
-    }
-  }, 5000);
-})();
-
-/* ── FAQ ── */
-function faqToggle(btn) {
-  var item = btn.closest('.faq-item');
-  var open = item.classList.contains('open');
-  document.querySelectorAll('.faq-item.open').forEach(function(el){el.classList.remove('open');});
-  if (!open) item.classList.add('open');
-}
-
-/* ── SCROLL REVEAL ── */
-(function(){
-  if (!('IntersectionObserver' in window)) {
-    document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('visible');});
-    return;
-  }
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if (e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
-    });
-  }, {threshold:0.08});
-  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
-})();
-
-/* ── PROGRESS BAR ANIMATE ── */
-setTimeout(function(){
-  var f = document.getElementById('progressFill');
-  if (f) f.style.width = '38%';
-}, 600);
-</script>
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
